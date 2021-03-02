@@ -11,11 +11,23 @@
         <field>Book__c.Published__c</field>
         <readable>false</readable>
     </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Branch__c.Phone__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
     <layoutAssignments>
         <layout>Book_Copy__c-Book Copy Layout</layout>
     </layoutAssignments>
+    <layoutAssignments>
+        <layout>Branch__c-Branch Layout</layout>
+    </layoutAssignments>
     <tabVisibilities>
         <tab>Book_Copy__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>Branch__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <userLicense>Salesforce</userLicense>
