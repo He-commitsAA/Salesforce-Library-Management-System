@@ -7,7 +7,7 @@ global inherited sharing class BookFlagger implements Schedulable {
 
     public void flagOldBookCopies(Date cutoff){
 
-        List<Book_Copy__c> bcs = [select createddate,flagged_for_removal__c from book_copy__c where createddate <: cutoff];
+        List<Book_Copy__c> bcs = [select flagged_for_removal__c from book_copy__c where createddate <: cutoff OR condition__c like 'damaged'];
         for(Book_Copy__c bc: bcs){
             bc.flagged_for_removal__c = true;
         }
