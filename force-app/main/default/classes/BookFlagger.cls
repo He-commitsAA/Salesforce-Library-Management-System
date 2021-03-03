@@ -2,7 +2,7 @@ global inherited sharing class BookFlagger implements Schedulable {
     
     global void execute(SchedulableContext sc){
 
-        flagOldBookCopies(Date.today.addYears(-10));
+        flagOldBookCopies(Date.today().addYears(-10));
     }
 
     public void flagOldBookCopies(Date cutoff){
