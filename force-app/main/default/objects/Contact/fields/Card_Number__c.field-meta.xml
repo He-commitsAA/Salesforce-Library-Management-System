@@ -6,7 +6,7 @@
     <inlineHelpText>What is the number on the Borrower&apos;s library card?</inlineHelpText>
     <label>Card Number</label>
     <length>100</length>
-    <required>true</required>
+    <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <type>Text</type>
     <unique>true</unique>
