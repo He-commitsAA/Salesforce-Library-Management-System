@@ -14,3 +14,4 @@ global inherited sharing class BookFlagger implements Schedulable {
         update bcs;
     }
 }
+
