@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Overdue__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( (Returned__c == FALSE &amp;&amp; (TODAY()- Due__c &gt; 0)),TRUE,FALSE)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>If the book has not been returned yet and it is past the loan&apos;s due date, then the loan is overdue.</inlineHelpText>
+    <label>Overdue</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>
