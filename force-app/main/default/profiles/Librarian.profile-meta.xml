@@ -2,7 +2,7 @@
 <Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <classAccesses>
         <apexClass>BookController</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>BookFlagger</apexClass>
@@ -14,7 +14,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>BranchHelper</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>LibrarianContactCreatorQueueable</apexClass>
@@ -26,7 +26,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>LoanDateFiller</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>TestDataFactory</apexClass>
@@ -34,7 +34,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>UserTriggerActions</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <custom>true</custom>
     <fieldPermissions>
