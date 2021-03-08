@@ -17,8 +17,7 @@ public inherited sharing class LibrarianContactCreatorQueueable implements Queue
                     RecordTypeId = librarianRecordType.Id,
                     FirstName = u.FirstName,
                     LastName = u.LastName,
-                    Email = u.Email,
-                    OwnerId = u.Id
+                    Email = u.Email
                 );
                 contacts.add(librarianContact);
             }
