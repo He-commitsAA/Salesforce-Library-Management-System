@@ -32,7 +32,9 @@ public with sharing class BookController {
             
             copy.Branch__c = null;
             copy.Borrower__c = borrower.Id;
-            //TODO: Change new books to used
+            if (copy.Condition__c == 'New') {
+                copy.Condition__c = 'Used';
+            }
 
             Insert new Loan__c(Book_Copy__c = copy.Id, Borrower__c = borrower.Id);
             Update copy;
@@ -44,7 +46,7 @@ public with sharing class BookController {
             throw new AuraHandledException(e.getMessage());
         }
     }
-    
+
     @AuraEnabled(cacheable=true)
     public static Id getUserId() {
         return UserInfo.getUserId();
