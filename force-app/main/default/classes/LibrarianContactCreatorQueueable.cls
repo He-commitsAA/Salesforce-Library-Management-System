@@ -12,15 +12,13 @@ public inherited sharing class LibrarianContactCreatorQueueable implements Queue
 
         for (User u : users) {
             if (u.ProfileId == librarianProfile.Id) {
-                Contact librarianContact = new Contact(
+                contacts.add(new Contact(
                     Librarian_User__c = u.Id,
                     RecordTypeId = librarianRecordType.Id,
                     FirstName = u.FirstName,
                     LastName = u.LastName,
-                    Email = u.Email,
-                    OwnerId = u.Id
-                );
-                contacts.add(librarianContact);
+                    Email = u.Email
+                ));
             }
         }
 
