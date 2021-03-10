@@ -244,6 +244,9 @@
         <recordType>Contact.Librarian</recordType>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Loan__c-Loan Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>User-User Layout</layout>
     </layoutAssignments>
     <objectPermissions>

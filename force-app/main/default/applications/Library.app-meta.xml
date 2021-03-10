@@ -17,5 +17,4 @@
     <tabs>Branch__c</tabs>
     <tabs>Loan__c</tabs>
     <uiType>Lightning</uiType>
-    <utilityBar>Library_UtilityBar</utilityBar>
 </CustomApplication>

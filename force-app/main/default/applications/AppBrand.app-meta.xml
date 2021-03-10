@@ -11,5 +11,4 @@
     <label>Ignore This</label>
     <navType>Standard</navType>
     <uiType>Lightning</uiType>
-    <utilityBar>Ignore_This_UtilityBar</utilityBar>
 </CustomApplication>
