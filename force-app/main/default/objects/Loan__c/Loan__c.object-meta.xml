@@ -155,9 +155,10 @@
     <externalSharingModel>ControlledByParent</externalSharingModel>
     <label>Loan</label>
     <nameField>
+        <displayFormat>L-{0000}</displayFormat>
         <label>Loan Name</label>
         <trackHistory>false</trackHistory>
-        <type>Text</type>
+        <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Loans</pluralLabel>
     <searchLayouts/>
