@@ -1,4 +1,5 @@
 import { LightningElement, track } from 'lwc';
+import { ShowToastEvent } from 'ligtning/platformShowToastEvent';
 import checkoutBook from '@salesforce/apex/BookController.checkoutBook';
 
 export default class CheckoutBook extends LightningElement {
@@ -21,10 +22,21 @@ export default class CheckoutBook extends LightningElement {
         this.message = undefined;
         this.error = undefined;
 
-        checkoutBook({bookNo: this.bookNo, cardNo: this.cardNo})
-            .then(result => this.message = result)
-            .error(error => this.error = error);
+        var toast;
 
+        checkoutBook({bookNo: this.bookNo, cardNo: this.cardNo})
+            .then(result => toast = new ShowToastEvent({
+                title: 'Checkout Successful',
+                message: result,
+                variant: 'success'
+            }))
+            .error(error => toast = new ShowToastEvent({
+                title: 'Checkout Failed',
+                message: error,
+                variant: 'error'
+            }));
+        
+        this.dispatchEvent(toast);
         event.target.disabled = false;
     }
 }

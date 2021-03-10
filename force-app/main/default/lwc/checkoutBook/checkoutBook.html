@@ -3,11 +3,5 @@
         <lightning-input label="Book Serial Number" name="bookNo" onchange={handleChange}></lightning-input>
         <lightning-input label="Borrower Card Number" name="cardNo" onchange={handleChange}></lightning-input>
         <lightning-button label="Checkout" variant="brand" title="Checkout a book" onclick={handleClick}></lightning-button>
-        <template if:true={message}>
-            <p class="message">{message}</p>
-        </template>
-        <template if:true={error}>
-            <p class="error">{error}</p>
-        </template>
     </lightning-card>
 </template>
