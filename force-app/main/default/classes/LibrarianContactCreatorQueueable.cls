@@ -21,7 +21,7 @@ public inherited sharing class LibrarianContactCreatorQueueable implements Queue
                 ));
             }
         }
-        
+
         Insert contacts;
     }
 }

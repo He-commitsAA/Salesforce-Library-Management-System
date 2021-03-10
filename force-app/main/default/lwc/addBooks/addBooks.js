@@ -1,10 +1,13 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, wire } from 'lwc';
 import addBooks from '@salesforce/apex/BookController.addBooks';
+import getUserId from '@salesforce/apex/BookController.getUserId';
 
 export default class AddBooks extends LightningElement {
     addSuccessful;
     quantity;
+    error;
     @api recordId;
+    currentUser;
 
     handleChange(event) {
         event.target.value = Math.floor(Math.abs(event.target.value));
@@ -12,12 +15,21 @@ export default class AddBooks extends LightningElement {
     }
 
     createRecords() {
-        this.addSuccessful = false;
+        this.addSuccessful = undefined;
         addBooks({ bookId: this.recordId, quantity: this.quantity })
             .then(() => {
-                this.addSuccessful = true;
-            }).catch(() => {
-                this.addSuccessful = false;
+                this.addSuccessful = `Successfully added ${this.quantity} copies`;
+                this.error = undefined;
+            }).catch((error) => {
+                this.addSuccessful = undefined;
+                this.error = error.body.message;
+                console.log(error);
             });
+    }
+
+    @wire(getUserId)
+    wireId(result) {
+        this.currentUser = result.data;
+        console.log(this.currentUser);
     }
 }
