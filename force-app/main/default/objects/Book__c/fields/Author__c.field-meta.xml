@@ -5,7 +5,7 @@
     <inlineHelpText>Who is this book by?</inlineHelpText>
     <label>Author</label>
     <length>100</length>
-    <required>false</required>
+    <required>true</required>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
     <type>Text</type>
