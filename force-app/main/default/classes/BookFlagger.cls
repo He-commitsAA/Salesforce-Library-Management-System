@@ -1,17 +1,30 @@
-global inherited sharing class BookFlagger implements Schedulable {
-    
-    global void execute(SchedulableContext sc){
+global class BookFlagger implements Database.Batchable<sObject>, Schedulable {
 
-        flagOldBookCopies(Date.today().addYears(-10));
+
+    global Database.QueryLocator start(Database.BatchableContext BC){
+
+        String query = 'SELECT flagged_for_removal__c from book_copy__c WHERE createddate <: cutoff OR condition__c LIKE \'damaged\'';
+        return Database.getQueryLocator(query);
     }
+  
 
-    public void flagOldBookCopies(Date cutoff){
+   global void execute(Database.BatchableContext BC, List<Book_Copy__c> bcs){
 
-        List<Book_Copy__c> bcs = [select flagged_for_removal__c from book_copy__c where createddate <: cutoff OR condition__c like 'damaged'];
-        for(Book_Copy__c bc: bcs){
-            bc.flagged_for_removal__c = true;
+        Date cutoff = Date.today().addYears(-25);
+        for(Book_Copy__c bcopy: bcs){
+            bcopy.flagged_for_removal__c = true;
         }
         update bcs;
+
+
+    }
+  
+   global void finish(Database.BatchableContext BC){
+
+   }
+
+   global void execute(SchedulableContext sc) {
+        BookFlagger bf = new BookFlagger ();
+        database.executebatch(bf);
     }
 }
-
