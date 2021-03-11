@@ -15,6 +15,7 @@ global class BookFlagger implements Database.Batchable<sObject>, Schedulable {
             bcopy.flagged_for_removal__c = true;
         }
         update bcs;
+        TaskCreator.createRemovalTask(bcs);
 
 
     }
