@@ -43,12 +43,12 @@ public inherited sharing class TestDataFactory {
             RecordTypeId = borrowerRecordType.Id,
             FirstName = 'Test',
             LastName = 'Test',
-            Card_Number__c = borrowerNumber++
+            Card_Number__c = String.valueOf(borrowerNumber++)
         );
     }
 
     public static void setLibrarianBranch(Id librarianUserId, Id branchId) {
-        Contact librarianContact = [Select Id, Branch FROM Contact WHERE Librarian_User__c=:librarianUserId];
+        Contact librarianContact = [Select Id, Branch__c FROM Contact WHERE Librarian_User__c=:librarianUserId];
         librarianContact.Branch__c = branchId;
         Update librarianContact;
     }

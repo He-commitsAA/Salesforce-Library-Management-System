@@ -1,5 +1,5 @@
 import { LightningElement, track } from 'lwc';
-import { ShowToastEvent } from 'ligtning/platformShowToastEvent';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import checkoutBook from '@salesforce/apex/BookController.checkoutBook';
 
 export default class CheckoutBook extends LightningElement {

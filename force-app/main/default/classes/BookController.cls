@@ -16,35 +16,30 @@ public with sharing class BookController {
 
     @AuraEnabled
     public static string checkoutBook(String bookNo, String cardNo){
-        try {
-            Book_Copy__c copy = [SELECT Id FROM Book_Copy__c WHERE Name=:bookNo];
-            if (copy == null) {
-                throw new AuraHandledException('Invalid Book Serial Number');
-            } else if ((copy.Branch__c == null) && (copy.Borrower__c != null)) {
-                throw new AuraHandledException('Book is already checked out');
-            }
-
-            
-            Contact borrower = [SELECT Id,Name FROM Contact WHERE Card_Number__c=:cardNo];
-            if (borrower == null) {
-                throw new AuraHandledException('Invalid Card Number');
-            }
-            
-            copy.Branch__c = null;
-            copy.Borrower__c = borrower.Id;
-            if (copy.Condition__c == 'New') {
-                copy.Condition__c = 'Used';
-            }
-
-            Insert new Loan__c(Book_Copy__c = copy.Id, Borrower__c = borrower.Id);
-            Update copy;
-            
-            Book__c book = [SELECT Name FROM Book__c WHERE Id=:copy.Book__c];
-            return 'Checked out copy of ' + book.Name + ' to ' + borrower.Name;
-
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
+        Book_Copy__c copy = [SELECT Id,Branch__c,Borrower__c,Condition__c FROM Book_Copy__c WHERE Name=:bookNo];
+        if (copy == null) {
+            throw new AuraHandledException('Invalid Book Serial Number');
+        } else if ((copy.Branch__c == null) && (copy.Borrower__c != null)) {
+            throw new AuraHandledException('Book is already checked out');
         }
+
+        
+        Contact borrower = [SELECT Id,Name FROM Contact WHERE Card_Number__c=:cardNo];
+        if (borrower == null) {
+            throw new AuraHandledException('Invalid Card Number');
+        }
+        
+        copy.Branch__c = null;
+        copy.Borrower__c = borrower.Id;
+        if (copy.Condition__c == 'New') {
+            copy.Condition__c = 'Used';
+        }
+
+        Update copy;
+        Insert new Loan__c(Book_Copy__c = copy.Id, Borrower__c = borrower.Id);
+        
+        Book__c book = [SELECT Name FROM Book__c WHERE Id=:copy.Book__c];
+        return 'Checked out copy of ' + book.Name + ' to ' + borrower.Name;
     }
 
     @AuraEnabled(cacheable=true)

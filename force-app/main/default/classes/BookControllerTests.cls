@@ -6,7 +6,9 @@ public with sharing class BookControllerTests {
         Insert branch;
 
         User librarian = TestDataFactory.createLibrarian();
+        Test.startTest();
         Insert librarian;
+        Test.stopTest();
         TestDataFactory.setLibrarianBranch(librarian.Id, branch.Id);
 
         Book__c book = TestDataFactory.createBook();
@@ -20,12 +22,12 @@ public with sharing class BookControllerTests {
     @isTest
     public static void checkoutBookTest() {
         User librarian = [SELECT Id FROM User WHERE Name='Test Test'];
-        RecordType borrowerRecordType = [SELECT Id FROM RecordType WHERE SobjectType='Contact' AND Name='Borrower'];
-
+        
         System.runAs(librarian) {
-            Contact borrower = [SELECT Id,Name,Card_Number__c FROM Contact WHERE RecordType=:borrowerRecordType.Id];
+            RecordType borrowerRecordType = [SELECT Id FROM RecordType WHERE SobjectType='Contact' AND Name='Borrower'];
+            Contact borrower = [SELECT Id,Name,Card_Number__c FROM Contact WHERE RecordTypeId=:borrowerRecordType.Id];
             Book_Copy__c bookCopy = [SELECT Id,Name,Book__c FROM Book_Copy__c];
-            Book_c book = [SELECT Id,Name FROM Book__c WHERE Id=:bookCopy.Book__c];
+            Book__c book = [SELECT Id,Name FROM Book__c WHERE Id=:bookCopy.Book__c];
 
             String result = BookController.checkoutBook(bookCopy.Name, borrower.Card_Number__c);
             System.assertEquals('Checked out copy of ' + book.Name + ' to ' + borrower.Name, result);
