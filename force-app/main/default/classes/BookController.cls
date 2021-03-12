@@ -16,7 +16,7 @@ public with sharing class BookController {
 
     @AuraEnabled
     public static string checkoutBook(String bookNo, String cardNo){
-        Book_Copy__c copy = [SELECT Id,Branch__c,Borrower__c,Condition__c FROM Book_Copy__c WHERE Name=:bookNo];
+        Book_Copy__c copy = [SELECT Id,Branch__c,Borrower__c,Condition__c,Book__c FROM Book_Copy__c WHERE Name=:bookNo];
         if (copy == null) {
             throw new AuraHandledException('Invalid Book Serial Number');
         } else if ((copy.Branch__c == null) && (copy.Borrower__c != null)) {
