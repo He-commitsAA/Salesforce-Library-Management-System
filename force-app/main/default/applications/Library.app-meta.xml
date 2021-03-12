@@ -19,6 +19,7 @@
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
     <label>Library</label>
     <navType>Standard</navType>
+    <tabs>standard-home</tabs>
     <tabs>standard-Contact</tabs>
     <tabs>Book__c</tabs>
     <tabs>Book_Copy__c</tabs>
