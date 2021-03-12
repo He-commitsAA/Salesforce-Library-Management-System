@@ -44,4 +44,66 @@ public with sharing class BookControllerTests {
             System.assertEquals('Used', bookCopy.Condition__c);
         }
     }
+
+    @isTest
+    public static void checkoutBookInvalidBookErrorTest() {
+        User librarian = [SELECT Id FROM User WHERE Name='Test Test'];
+        
+        System.runAs(librarian) {
+            RecordType borrowerRecordType = [SELECT Id FROM RecordType WHERE SobjectType='Contact' AND Name='Borrower'];
+            Contact borrower = [SELECT Card_Number__c FROM Contact WHERE RecordTypeId=:borrowerRecordType.Id];
+
+            Boolean gotError = false;
+            try {
+                BookController.checkoutBook('', borrower.Card_Number__c);
+            } catch (InputException e) {
+                gotError = true;
+                System.assertEquals('Invalid Book Serial Number', e.getMessage());
+            }
+
+            System.assert(gotError);
+        }
+    }
+
+    @isTest
+    public static void checkoutBookInvalidBorrowerErrorTest() {
+        User librarian = [SELECT Id FROM User WHERE Name='Test Test'];
+        
+        System.runAs(librarian) {
+            Book_Copy__c bookCopy = [SELECT Name FROM Book_Copy__c];
+
+            Boolean gotError = false;
+            try {
+                BookController.checkoutBook(bookCopy.Name, '');
+            } catch (InputException e) {
+                gotError = true;
+                System.assertEquals('Invalid Card Number', e.getMessage());
+            }
+
+            System.assert(gotError);
+        }
+    }
+
+    @isTest
+    public static void checkoutBookCheckedOutErrorTest() {
+        User librarian = [SELECT Id FROM User WHERE Name='Test Test'];
+        
+        System.runAs(librarian) {
+            RecordType borrowerRecordType = [SELECT Id FROM RecordType WHERE SobjectType='Contact' AND Name='Borrower'];
+            Contact borrower = [SELECT Card_Number__c FROM Contact WHERE RecordTypeId=:borrowerRecordType.Id];
+            Book_Copy__c bookCopy = [SELECT Name FROM Book_Copy__c];
+
+            BookController.checkoutBook(bookCopy.Name, borrower.Card_Number__c);
+
+            Boolean gotError = false;
+            try {
+                BookController.checkoutBook(bookCopy.Name, borrower.Card_Number__c);
+            } catch (InputException e) {
+                gotError = true;
+                System.assertEquals('Book is already checked out', e.getMessage());
+            }
+
+            System.assert(gotError);
+        }
+    }
 }

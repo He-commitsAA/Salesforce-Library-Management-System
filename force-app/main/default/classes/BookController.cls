@@ -16,17 +16,22 @@ public with sharing class BookController {
 
     @AuraEnabled
     public static string checkoutBook(String bookNo, String cardNo){
-        Book_Copy__c copy = [SELECT Id,Branch__c,Borrower__c,Condition__c,Book__c FROM Book_Copy__c WHERE Name=:bookNo];
-        if (copy == null) {
-            throw new AuraHandledException('Invalid Book Serial Number');
-        } else if ((copy.Branch__c == null) && (copy.Borrower__c != null)) {
-            throw new AuraHandledException('Book is already checked out');
+        Book_Copy__c copy;
+        try {
+            copy = [SELECT Id,Branch__c,Borrower__c,Condition__c,Book__c FROM Book_Copy__c WHERE Name=:bookNo];
+        } catch (QueryException e) {
+            throw new InputException('Invalid Book Serial Number');
+        }
+        if ((copy.Branch__c == null) && (copy.Borrower__c != null)) {
+            throw new InputException('Book is already checked out');
         }
 
-        
-        Contact borrower = [SELECT Id,Name FROM Contact WHERE Card_Number__c=:cardNo];
-        if (borrower == null) {
-            throw new AuraHandledException('Invalid Card Number');
+        RecordType borrowerRecordType = [SELECT Id FROM RecordType WHERE SobjectType='Contact' AND Name='Borrower'];
+        Contact borrower;
+        try {
+            borrower = [SELECT Id,Name FROM Contact WHERE Card_Number__c=:cardNo AND RecordTypeId=:borrowerRecordType.Id];
+        } catch (QueryException e) {
+            throw new InputException('Invalid Card Number');
         }
         
         copy.Branch__c = null;
