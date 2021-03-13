@@ -3,11 +3,8 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import checkoutBook from '@salesforce/apex/BookController.checkoutBook';
 
 export default class CheckoutBook extends LightningElement {
-    @track bookNo;
-    @track cardNo;
-
-    message;
-    error;
+    bookNo;
+    cardNo;
 
     handleChange(event) {
         if (event.target.name === 'bookNo') {
@@ -18,10 +15,6 @@ export default class CheckoutBook extends LightningElement {
     }
 
     handleClick(event) {
-        event.target.disabled = true;
-        this.message = undefined;
-        this.error = undefined;
-
         var toast;
 
         checkoutBook({bookNo: this.bookNo, cardNo: this.cardNo})
@@ -30,13 +23,21 @@ export default class CheckoutBook extends LightningElement {
                 message: result,
                 variant: 'success'
             }))
-            .error(error => toast = new ShowToastEvent({
+            .catch(error => toast = new ShowToastEvent({
                 title: 'Checkout Failed',
-                message: error,
+                message: error.body.message,
                 variant: 'error'
-            }));
-        
-        this.dispatchEvent(toast);
-        event.target.disabled = false;
+            }))
+            .finally(() => {
+                this.dispatchEvent(toast);
+                this.template.querySelectorAll('lightning-input').forEach(element => element.value = null);
+            });
+            
+    }
+
+    handleKeyPress(event) {
+        if (event.key === 'Enter') {
+            this.template.querySelector('lightning-button').click();
+        }
     }
 }
