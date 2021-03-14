@@ -1,0 +1,11 @@
+<template>
+    <lightning-card title="Checkout a Book" icon-name="standard:article">
+        <div class="slds-m-around_small">
+            <lightning-input label="Book Serial Number" name="bookNo" onchange={handleChange} onkeypress={handleKeyPress}></lightning-input>
+            <lightning-input label="Borrower Card Number" name="cardNo" onchange={handleChange} onkeypress={handleKeyPress}></lightning-input>
+            <div class="slds-m-top_x-small">
+                <lightning-button label="Checkout" variant="brand" title="Checkout a book" onclick={handleClick}></lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+</template>

@@ -15,6 +15,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>BookControllerTests</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>BookFlagger</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -105,7 +109,7 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.Branch__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -120,7 +124,7 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.Current_Loans__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -290,7 +294,7 @@
         <allowDelete>true</allowDelete>
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
-        <modifyAllRecords>false</modifyAllRecords>
+        <modifyAllRecords>true</modifyAllRecords>
         <object>Contact</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
@@ -305,6 +309,7 @@
     </objectPermissions>
     <recordTypeVisibilities>
         <default>true</default>
+        <personAccountDefault>true</personAccountDefault>
         <recordType>Contact.Borrower</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
