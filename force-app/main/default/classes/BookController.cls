@@ -37,7 +37,6 @@ public with sharing class BookController {
 
     @AuraEnabled
     public static void renewLoan(Id loanId, Integer days) {
-        //Id loanId = Id.valueOf(strid);
         Loan__c loan = [select id,Due__c from Loan__c where Id = :loanId LIMIT 1].get(0);
         loan.Due__c = loan.Due__c.addDays(days);
         update loan;
