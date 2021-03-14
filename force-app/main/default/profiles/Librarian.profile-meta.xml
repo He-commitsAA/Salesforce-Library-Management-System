@@ -15,11 +15,11 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>BookControllerTests</apexClass>
+        <apexClass>BookFlagger</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>BookFlagger</apexClass>
+        <apexClass>BranchController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -37,6 +37,10 @@
     <classAccesses>
         <apexClass>LoanDateFiller</apexClass>
         <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>PagedResult</apexClass>
+        <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>TaskCreator</apexClass>
@@ -82,11 +86,6 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Branch__c.Location__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
         <editable>false</editable>
         <field>Branch__c.Phone__c</field>
         <readable>false</readable>
@@ -114,7 +113,7 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.Branch__c</field>
-        <readable>true</readable>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -129,7 +128,7 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.Current_Loans__c</field>
-        <readable>true</readable>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -299,7 +298,7 @@
         <allowDelete>true</allowDelete>
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
+        <modifyAllRecords>false</modifyAllRecords>
         <object>Contact</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
@@ -314,7 +313,6 @@
     </objectPermissions>
     <recordTypeVisibilities>
         <default>true</default>
-        <personAccountDefault>true</personAccountDefault>
         <recordType>Contact.Borrower</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
@@ -337,6 +335,14 @@
     </tabVisibilities>
     <tabVisibilities>
         <tab>Loan__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>Location_Apps</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>Location_Apps1</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>

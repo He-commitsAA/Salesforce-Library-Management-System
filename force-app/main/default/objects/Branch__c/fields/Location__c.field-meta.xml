@@ -4,7 +4,7 @@
     <displayLocationInDecimal>true</displayLocationInDecimal>
     <externalId>false</externalId>
     <label>Location</label>
-    <required>false</required>
+    <required>true</required>
     <scale>7</scale>
     <trackTrending>false</trackTrending>
     <type>Location</type>
