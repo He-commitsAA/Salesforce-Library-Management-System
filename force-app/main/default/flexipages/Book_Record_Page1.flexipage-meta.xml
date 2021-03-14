@@ -100,6 +100,11 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>bookInfo</componentName>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
                 <componentInstanceProperties>
                     <name>tabs</name>
                     <value>maintabs</value>
