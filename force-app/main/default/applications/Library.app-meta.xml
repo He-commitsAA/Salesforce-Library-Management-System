@@ -11,6 +11,7 @@
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
     <label>Library</label>
     <navType>Standard</navType>
+    <tabs>standard-home</tabs>
     <tabs>standard-Contact</tabs>
     <tabs>Location_Apps1</tabs>
     <tabs>Book__c</tabs>
