@@ -155,9 +155,10 @@
     <externalSharingModel>ControlledByParent</externalSharingModel>
     <label>Loan</label>
     <nameField>
-        <label>Loan Name</label>
+        <displayFormat>{MM}-{DD}-{YYYY}-{00000}</displayFormat>
+        <label>Loan Number</label>
         <trackHistory>false</trackHistory>
-        <type>Text</type>
+        <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Loans</pluralLabel>
     <searchLayouts/>

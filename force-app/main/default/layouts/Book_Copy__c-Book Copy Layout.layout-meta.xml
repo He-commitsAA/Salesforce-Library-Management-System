@@ -30,6 +30,10 @@
                 <behavior>Edit</behavior>
                 <field>Flagged_for_Removal__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Age__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns/>
         <style>TwoColumnsTopToBottom</style>

@@ -1,0 +1,28 @@
+<aura:component
+    implements="flexipage:availableForAllPageTypes"
+    controller="BranchController"
+    access="global"
+>
+    <ltng:require
+        styles="{!$Resource.leaflet + '/leaflet.css'}"
+        scripts="{!$Resource.leaflet + '/leaflet.js'}"
+        afterScriptsLoaded="{!c.handleJSLoaded}"
+    />
+
+    <aura:attribute name="branches" type="Object[]" default="[]" />
+    <aura:attribute name="center" type="SObject" access="global" />
+    <aura:attribute name="jsLoaded" type="boolean" default="false" />
+
+    <aura:registerEvent name="selectSObject" type="ltng:selectSObject" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.handleInit}" />
+
+    <lightning:messageChannel
+        type="BranchSelected__c"
+        aura:id="branchSelectedMessageChannel"
+    />
+
+    <article class="slds-card">
+        <div aura:id="map"></div>
+    </article>
+</aura:component>

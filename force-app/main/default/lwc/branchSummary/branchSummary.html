@@ -1,0 +1,32 @@
+<template>
+    <lightning-card icon-name="custom:custom85">
+        <template if:true={branch.data}>
+            <span slot="title">{branchName}</span>
+            <lightning-button-icon
+                icon-name="utility:expand_alt"
+                slot="actions"
+                onclick={handleNavigateToRecord}
+            ></lightning-button-icon>
+            <div class="slds-var-m-horizontal_medium">
+                <lightning-record-form
+                    object-api-name="Branch__c"
+                    record-id={branchId}
+                    fields={branchFields}
+                    columns="2"
+                >
+                </lightning-record-form>
+            </div>
+        </template>
+        <template if:false={branchId}>
+            <c-error-panel
+                friendly-message="Select a branch to see details"
+            ></c-error-panel>
+        </template>
+        <template if:true={branch.error}>
+            <c-error-panel
+                friendly-message="Error retrieving data"
+                errors={branch.error}
+            ></c-error-panel>
+        </template>
+    </lightning-card>
+</template>
