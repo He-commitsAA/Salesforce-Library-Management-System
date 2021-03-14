@@ -1,1 +1,1 @@
-System.schedule('Monthly Book Flagging', '0 0 4 1 * ?', new BookFlagger());
+System.schedule('Monthly Damaged Book Flagging', '0 0 4 1 * ?', new BookFlagger());

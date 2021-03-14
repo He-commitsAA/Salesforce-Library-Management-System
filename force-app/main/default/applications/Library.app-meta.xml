@@ -25,5 +25,6 @@
     <tabs>Book_Copy__c</tabs>
     <tabs>Branch__c</tabs>
     <tabs>Loan__c</tabs>
+    <tabs>standard-Task</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>
