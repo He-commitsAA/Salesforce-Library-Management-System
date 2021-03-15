@@ -21,4 +21,8 @@ export default class BookInfo extends LightningElement {
                 .then(data => this.bookInfo = data.items[0]);
         }
     }
+
+    get authors() {
+        return this.bookInfo.volumeInfo.authors.join(', ');
+    }
 }
