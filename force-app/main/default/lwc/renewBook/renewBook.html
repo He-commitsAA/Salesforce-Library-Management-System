@@ -1,0 +1,33 @@
+<template>
+    <lightning-card title="Renew Books" icon-name="custom:custom13">
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="12" padding="around-medium">
+                <lightning-input type="search" name="searchBox" icon-name="utility:search" onchange={handleChange}></lightning-input>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" padding="around-medium">
+                <template if:true={loans}>
+                    <table>
+                        <tr>
+                            <th>Loan</th>
+                            <th>Title</th>
+                            <th>Serial#</th>
+                            <th>Borrower</th>
+                            <th>Due</th>
+                            <th>Renew</th>
+                        </tr>
+                        <template for:each={loans} for:item="loan">
+                            <tr key={loan.Id}>
+                                <td>{loan.Name}</td>
+                                <td>{loan.Title}</td>
+                                <td>{loan.Serial}</td>
+                                <td>{loan.Member}</td>
+                                <td>{loan.Due__c}</td>
+                                <td><lightning-button name={loan.Id} icon-name="utility:refresh" onclick={renew}></lightning-button></td>
+                            </tr>
+                        </template>
+                    </table>
+                </template>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+</template>
