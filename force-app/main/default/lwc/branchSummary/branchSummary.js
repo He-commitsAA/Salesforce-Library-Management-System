@@ -9,10 +9,11 @@ import {
 import BRANCHSELECTEDMC from '@salesforce/messageChannel/BranchSelected__c';
 import NAME_FIELD from '@salesforce/schema/Branch__c.Name';
 import PHONE_NUMBER_FIELD from '@salesforce/schema/Branch__c.Phone__c';
+import ADDRESS_FIELD from '@salesforce/schema/Branch__c.Address__c';
 
 export default class BranchSummary extends NavigationMixin(LightningElement) {
     branchId;
-    branchFields = [NAME_FIELD, PHONE_NUMBER_FIELD];
+    branchFields = [NAME_FIELD, PHONE_NUMBER_FIELD, ADDRESS_FIELD];
     subscription = null;
 
     @wire(MessageContext)
