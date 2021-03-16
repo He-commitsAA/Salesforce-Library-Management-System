@@ -74,4 +74,29 @@ public with sharing class BookController {
         loan.Due__c = loan.Due__c.addDays(days);
         update loan;
     }
+
+    @AuraEnabled
+    public static string returnBook(String bookNo, Boolean damaged){
+        Loan__c loan;
+        Book_copy__c copy;
+        try {
+            copy = [SELECT Id,Name,Branch__c,Borrower__c,Condition__c,Book__c FROM Book_Copy__c WHERE Name=:bookNo LIMIT 1];
+        } catch (QueryException e) {
+            throw new InputException('Invalid book serial number');
+        }
+        try {
+            loan = [SELECT Id,Name,Borrower__c,Book_Copy__c,Returned__c FROM Loan__c WHERE Book_copy__c=:copy.id LIMIT 1];
+        } catch (QueryException e) {
+            throw new InputException('Cannot find loan');
+        }
+        loan.Returned__c = true;
+        copy.Borrower__c = null;
+        copy.Branch__c = BranchHelper.getBranch().id;
+        if(damaged == true){
+            copy.Condition__c = 'Damaged';
+        }
+        update loan;
+        update copy;
+        return 'Return successful.';
+    }
 }
