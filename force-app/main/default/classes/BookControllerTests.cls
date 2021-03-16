@@ -106,4 +106,29 @@ public with sharing class BookControllerTests {
             System.assert(gotError);
         }
     }
+
+    @isTest
+    public static void returnBookTest(){
+        User librarian = [SELECT Id FROM User WHERE Name='Test Test'];
+        
+        System.runAs(librarian) {
+            RecordType borrowerRecordType = [SELECT Id FROM RecordType WHERE SobjectType='Contact' AND Name='Borrower'];
+            Contact borrower = [SELECT Id,Name,Card_Number__c FROM Contact WHERE RecordTypeId=:borrowerRecordType.Id];
+            Book_Copy__c bookCopy = [SELECT Id,Name,Book__c FROM Book_Copy__c];
+            Book__c book = [SELECT Id,Name FROM Book__c WHERE Id=:bookCopy.Book__c];
+
+            String checkedOut = BookController.checkoutBook(bookCopy.Name, borrower.Card_Number__c);
+
+            String result = BookController.returnBook(bookCopy.id, true);
+            System.assertEquals('Return successful.',result);
+
+            Loan__c loan = [SELECT Borrower__c,Checkout__c,Due__c,Returned__c FROM Loan__c WHERE Book_Copy__c=:bookCopy.Id];
+            System.assertEquals(true, loan.Returned__c);
+
+            bookCopy = [SELECT id,Book__c,Borrower__c,Branch__c,Condition__c FROM Book_Copy__c WHERE Id=:bookCopy.Id];
+            System.assertEquals(null, bookCopy.Borrower__c);
+            System.assertEquals(BranchHelper.getBranch().id, bookCopy.Branch__c);
+            System.assertEquals('Damaged',bookCopy.Condition__c);
+        }
+    }
 }

@@ -23,6 +23,11 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>returnBook</componentName>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
                 <componentName>renewBook</componentName>
             </componentInstance>
         </itemInstances>
