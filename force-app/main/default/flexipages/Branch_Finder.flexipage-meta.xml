@@ -22,7 +22,7 @@
         <name>region3</name>
         <type>Region</type>
     </flexiPageRegions>
-    <masterLabel>Location Apps</masterLabel>
+    <masterLabel>Branch Finder</masterLabel>
     <template>
         <name>flexipage:appHomeTemplateHeaderTwoColumns</name>
     </template>
