@@ -1,0 +1,27 @@
+<template>
+    <div if:true={bookInfo}>
+        <lightning-card>
+            <div class="container slds-m-around_small">
+                <div class="image">
+                    <img src={bookInfo.volumeInfo.imageLinks.thumbnail}>
+                </div>
+                <div class="information">
+                    <p class="title">{bookInfo.volumeInfo.title}</p>
+                    <p class="subtitle" if:true={bookInfo.volumeInfo.subtitle}>{bookInfo.volumeInfo.subtitle}</p>
+                    <p class="authors">by {authors}</p>
+                    <br>
+                    <p>{bookInfo.volumeInfo.description}</p>
+                    <br>
+                    <b>Order Online</b>
+                    <ul>
+                        <template for:each={orderLinks} for:item="link">
+                            <li key={link.name}>
+                                <a href={link.url}>{link.name}</a>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </div>
+        </lightning-card>
+    </div>
+</template>
