@@ -40,7 +40,7 @@ public with sharing class ContactTriggerActions {
         }
 
         if (contactIds.size() > 0) {
-            List<Task> tasks = [SELECT Status FROM Task WHERE Subject=:librarianTaskSubject AND Status!='Completed' AND WhoId IN :contactIds];
+            List<Task> tasks = [SELECT Status FROM Task WHERE Subject=:librarianTaskSubject AND Status!='Completed' AND WhoId IN :contactIds FOR UPDATE];
             for (task t : tasks) {
                 t.Status = 'Completed';
             }
