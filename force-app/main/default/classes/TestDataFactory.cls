@@ -31,7 +31,9 @@ public inherited sharing class TestDataFactory {
 
     public static Branch__c createBranch() {
         return new Branch__c(
-            Name = 'Test'
+            Name = 'Test',
+            Location__Latitude__s = 0,
+            Location__Longitude__s = 0
         );
     }
 
