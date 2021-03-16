@@ -7,7 +7,6 @@
     <columns>CONTACT.EMAIL</columns>
     <columns>CONTACT.TITLE</columns>
     <columns>CORE.USERS.ALIAS</columns>
-    <columns>Card_Number__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>
