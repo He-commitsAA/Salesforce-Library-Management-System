@@ -1,16 +1,6 @@
 public with sharing class ContactTriggerActions {
     private static final String librarianTaskSubject = 'Assign Librarian to Branch';
     
-    private static Task newBranchTask(Id contactId) {
-        return new Task(
-            Subject = librarianTaskSubject,
-            Status = 'Not Started',
-            Priority = 'High',
-            ActivityDate = Date.today(),
-            WhoId = contactId
-        );
-    }
-    
     public static void enforceLibrarianBranch(List<Contact> contacts) {
         RecordType librarianRecordType = [SELECT Id FROM RecordType WHERE SobjectType='Contact' AND Name='Librarian'];
         
@@ -27,7 +17,13 @@ public with sharing class ContactTriggerActions {
 
         for (Contact con : contacts) {
             if ((con.RecordTypeId == librarianRecordType.Id) && (con.Branch__c == null)) {
-                tasks.add(newBranchTask(con.Id));
+                tasks.add(new Task(
+                    Subject = librarianTaskSubject,
+                    Status = 'Not Started',
+                    Priority = 'High',
+                    ActivityDate = Date.today(),
+                    WhoId = con.Id
+                ));
             }
         }
 
