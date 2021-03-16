@@ -10,6 +10,6 @@
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
     <label>Ignore This</label>
     <navType>Standard</navType>
-    <tabs>Location_Apps</tabs>
+    <tabs>Branch_Finder</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>
