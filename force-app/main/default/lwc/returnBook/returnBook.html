@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="Return a Book" icon-name="standard:article">
+        <div class="slds-m-around_small">
+            <lightning-input label="Book Serial Number" name="bookNo" onchange={handleChange} onkeypress={handleKeyPress}></lightning-input>
+            <br>
+            <lightning-input type="checkbox" label="Damaged?" name="damaged" onchange={handleCheckBoxChange}></lightning-input>
+            <br>
+            <div class="slds-m-top_x-small">
+                <lightning-button label="Return" variant="brand" title="Return a book" onclick={handleClick}></lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+</template>
