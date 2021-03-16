@@ -34,7 +34,7 @@ public with sharing class BookController {
     public static string checkoutBook(String bookNo, String cardNo){
         Book_Copy__c copy;
         try {
-            copy = [SELECT Id,Branch__c,Borrower__c,Condition__c,Book__c FROM Book_Copy__c WHERE Name=:bookNo];
+            copy = [SELECT Id,Branch__c,Borrower__c,Condition__c,Book__r.Name FROM Book_Copy__c WHERE Name=:bookNo];
         } catch (QueryException e) {
             throw new InputException('Invalid Book Serial Number');
         }
@@ -59,8 +59,7 @@ public with sharing class BookController {
         Update copy;
         Insert new Loan__c(Book_Copy__c = copy.Id, Borrower__c = borrower.Id);
         
-        Book__c book = [SELECT Name FROM Book__c WHERE Id=:copy.Book__c];
-        return 'Checked out copy of ' + book.Name + ' to ' + borrower.Name;
+        return 'Checked out copy of ' + copy.Book__r.Name + ' to ' + borrower.Name;
     }
 
     @AuraEnabled(cacheable=true)
