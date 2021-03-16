@@ -1,8 +1,9 @@
-trigger ContactTrigger on Contact (after insert, after update, after delete) {
-    if (Trigger.isAfter && Trigger.isInsert) {
+trigger ContactTrigger on Contact (before update, after insert, after update) {
+    if (Trigger.isBefore && Trigger.isUpdate) {
+        ContactTriggerActions.enforceLibrarianBranch(Trigger.new);
+    } else if (Trigger.isAfter && Trigger.isInsert) {
         ContactTriggerActions.createLibrarianTasks(Trigger.new);
-    }
-    if (Trigger.isAfter && Trigger.isUpdate) {
+    } else if (Trigger.isAfter && Trigger.isUpdate) {
         ContactTriggerActions.updateLibrarianTasks(Trigger.new, Trigger.oldMap);
-    }
+    } 
 }

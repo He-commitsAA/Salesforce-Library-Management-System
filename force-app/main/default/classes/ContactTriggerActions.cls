@@ -6,10 +6,21 @@ public with sharing class ContactTriggerActions {
             Subject = librarianTaskSubject,
             Status = 'Not Started',
             Priority = 'High',
+            ActivityDate = Date.today(),
             WhoId = contactId
         );
     }
     
+    public static void enforceLibrarianBranch(List<Contact> contacts) {
+        RecordType librarianRecordType = [SELECT Id FROM RecordType WHERE SobjectType='Contact' AND Name='Librarian'];
+        
+        for (Contact con : contacts) {
+            if ((con.RecordTypeId == librarianRecordType.Id) && (con.Branch__c == null)) {
+                con.Branch__c.addError('Librarians must be associated with a Branch');
+            }
+        }
+    }
+
     public static void createLibrarianTasks(List<Contact> contacts) {
         RecordType librarianRecordType = [SELECT Id FROM RecordType WHERE SobjectType='Contact' AND Name='Librarian'];
         List<Task> tasks = new List<Task>();
@@ -25,16 +36,13 @@ public with sharing class ContactTriggerActions {
 
     public static void updateLibrarianTasks(List<Contact> contacts, Map<Id,Contact> oldContactsMap) {
         RecordType librarianRecordType = [SELECT Id FROM RecordType WHERE SobjectType='Contact' AND Name='Librarian'];
-        List<Id> contactIds = new List<Id>();
-        List<Task> newTasks = new List<Task>();
+        List<Id> contactIds = new List<Id>(); //list of contacts with tasks that should be completed
 
         for (Contact con : contacts) {
             if (con.RecordTypeId == librarianRecordType.Id) {
-                Contact oldCon = oldContactsMap.get(con.Id);
-                if ((con.Branch__c != null) && (oldCon.Branch__c == null)) {
+                //if branch went from null to filled, add the contact to the list
+                if ((con.Branch__c != null) && (oldContactsMap.get(con.Id).Branch__c == null)) {
                     contactIds.add(con.Id);
-                } else if ((con.Branch__c == null) && (oldCon.Branch__c != null)) {
-                    newTasks.add(newBranchTask(con.Id));
                 }
             }
         }
@@ -46,7 +54,5 @@ public with sharing class ContactTriggerActions {
             }
             Update tasks;
         }
-
-        Insert newTasks;
     }
 }
