@@ -25,14 +25,14 @@ export default class RenewBook extends LightningElement {
         //change shown loans to give best match to query by copy#, title, or borrower
         this.loans = [];
         for (let i in this.allLoans) {
-            let l = this.allLoans[i];
+            let l = this.allLoans[i]; //todo: toLowerCase()
             if (l.Title.includes(searchQuery) || l.Serial.includes(searchQuery) || l.Member.includes(searchQuery)) {
                 this.loans.push(l);
             }
         }
-    }
+    } //todo: renew button blue background
 
-    renew(event) {
+    renew(event) { //todo: make new date 2 digits
         //renew the book
         let loanId = event.target.name;
         renewLoan({ loanId: loanId, days: extension })
