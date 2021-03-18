@@ -34,8 +34,7 @@ public inherited sharing class TestDataFactory {
             Name = 'Test',
             Address__c = 'Test',
             Location__Latitude__s = 0,
-            Location__Longitude__s = 0,
-            Address__c = '1111 Tester Lane'
+            Location__Longitude__s = 0
         );
     }
 
