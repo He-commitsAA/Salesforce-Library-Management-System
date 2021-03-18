@@ -4,5 +4,6 @@ trigger UserTrigger on User (after insert, after update) {
     }
     if (Trigger.isAfter && Trigger.isUpdate) {
         UserTriggerActions.updateContactsForLibrarians(Trigger.new);
+    //    UserTriggerActions.createDeleteContactsForLibrarians(Trigger.new, Trigger.oldMap);
     }
 }

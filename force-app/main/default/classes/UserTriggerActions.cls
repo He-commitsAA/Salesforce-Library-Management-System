@@ -13,7 +13,7 @@ public inherited sharing class UserTriggerActions {
 
         for (User u : users) {
             if (u.ProfileId == librarianProfile.Id) {
-                if (librarians.containsKey(u.Id)) {
+                if (librarians.containsKey(u.Id) && u.IsActive) {
                     Contact l = librarians.get(u.Id);
                     l.FirstName = u.FirstName;
                     l.LastName = u.LastName;
@@ -23,5 +23,30 @@ public inherited sharing class UserTriggerActions {
             }
         }
         update changedContacts;
+    }
+
+    public static void createDeleteContactsForLibrarians(List<User> newusers, List<User> oldusers) {
+        List<User> active = new List<User>();
+        List<User> inactive = new List<User>();
+
+        for (User u : newusers) {
+            if (u.IsActive) {
+                //todo: check if old is inactive
+                active.add(u);
+            }
+            else {
+                //todo: check if old is active
+                inactive.add(u);
+            }
+        }
+
+        createContactsForLibrarians(active);
+        deleteContactsForLibrarians(inactive);
+    }
+
+    private static void deleteContactsForLibrarians(List<User> users) {
+        RecordType librarianRecordType = [SELECT Id FROM RecordType WHERE SobjectType='Contact' AND Name='Librarian'];
+        List<Contact> libContacts = [SELECT Id FROM Contact WHERE RecordTypeId = :librarianRecordType.Id];
+        //delete
     }
 }
