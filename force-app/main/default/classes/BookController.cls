@@ -23,7 +23,7 @@ public with sharing class BookController {
     @AuraEnabled
     public static void addBooks(Id bookId, Integer quantity) {
         List<Book_Copy__c> copies = new List<Book_Copy__c>();
-        for (Integer i=0; i<quantity; i++) {
+        for (Integer i=0; i<quantity; i++) { //todo: take in the branch as a param instead
             Book_Copy__c copy = new Book_Copy__c(Condition__c='New', Book__c=bookId, Branch__c=BranchHelper.getBranch().Id);
             copies.add(copy);
         }
@@ -34,7 +34,7 @@ public with sharing class BookController {
     public static string checkoutBook(String bookNo, String cardNo){
         Book_Copy__c copy;
         try {
-            copy = [SELECT Id,Branch__c,Borrower__c,Condition__c,Book__c FROM Book_Copy__c WHERE Name=:bookNo];
+            copy = [SELECT Id,Branch__c,Borrower__c,Condition__c,Book__r.Name FROM Book_Copy__c WHERE Name=:bookNo];
         } catch (QueryException e) {
             throw new InputException('Invalid Book Serial Number');
         }
@@ -59,8 +59,7 @@ public with sharing class BookController {
         Update copy;
         Insert new Loan__c(Book_Copy__c = copy.Id, Borrower__c = borrower.Id);
         
-        Book__c book = [SELECT Name FROM Book__c WHERE Id=:copy.Book__c];
-        return 'Checked out copy of ' + book.Name + ' to ' + borrower.Name;
+        return 'Checked out copy of ' + copy.Book__r.Name + ' to ' + borrower.Name;
     }
 
     @AuraEnabled(cacheable=true)
