@@ -79,12 +79,12 @@ public with sharing class BookController {
         Loan__c loan;
         Book_copy__c copy;
         try {
-            copy = [SELECT Id,Name,Branch__c,Borrower__c,Condition__c,Book__c FROM Book_Copy__c WHERE Name=:bookNo LIMIT 1];
+            copy = [SELECT Id,Name,Branch__c,Borrower__c,Condition__c,Book__c FROM Book_Copy__c WHERE Name=:bookNo LIMIT 1 FOR UPDATE];
         } catch (QueryException e) {
-            throw new InputException('Invalid book serial number');
+            throw new InputException('Invalid serial number');
         }
         try {
-            loan = [SELECT Id,Name,Borrower__c,Book_Copy__c,Returned__c FROM Loan__c WHERE Book_copy__c=:copy.id LIMIT 1];
+            loan = [SELECT Id,Name,Borrower__c,Book_Copy__c,Returned__c FROM Loan__c WHERE Book_copy__c=:copy.id LIMIT 1 FOR UPDATE];
         } catch (QueryException e) {
             throw new InputException('Cannot find loan');
         }
