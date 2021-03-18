@@ -1,19 +1,17 @@
 ({
-    getProperties: function getProperties(component) {
-        var action = component.get('c.getPagedBranchList');
+    getBranches: function getBranches(component) {
+        var action = component.get('c.getBranches');
 
-        action.setParams({
-            pageSize: 100,
-            pageNumber: 1
-        });
         action.setCallback(this, function (response) {
             var state = response.getState();
 
+            //if successful, set branches to the results
             if (state === 'SUCCESS') {
-                var pagedResults = response.getReturnValue();
+                var branchRecords = response.getReturnValue();
 
-                component.set('v.branches', pagedResults.records);
+                component.set('v.branches', branchRecords);
             } else {
+                //if unsuccessful, show a toast
                 var toastEvent = $A.get('e.force:showToast');
 
                 toastEvent.setParams({
@@ -26,4 +24,5 @@
         });
         $A.enqueueAction(action);
     }
+
 });

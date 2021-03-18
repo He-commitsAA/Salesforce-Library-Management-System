@@ -14,23 +14,12 @@
             component.map = window.L.map(mapElement, {
                 zoomControl: true,
                 tap: false
-                // eslint-disable-next-line no-magic-numbers
             }).setView([38.907, -77.036], 13);
             component.map.scrollWheelZoom.disable();
             var url =
                 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}';
 
             window.L.tileLayer(url).addTo(component.map);
-        }
-
-        var center = component.get('v.center');
-
-        if (center && center.lat && center.long) {
-            component.map.setView(center);
-        }
-
-        if (component.layerGroup) {
-            component.map.removeLayer(component.layerGroup);
         }
 
         var branches = component.get('v.branches');
@@ -55,7 +44,6 @@
             marker.branchId = branch.Id;
             var callback = $A.getCallback(function (event) {
                 var mc = component.find('branchSelectedMessageChannel');
-
                 mc.publish({ branchId: event.target.branchId });
             });
 

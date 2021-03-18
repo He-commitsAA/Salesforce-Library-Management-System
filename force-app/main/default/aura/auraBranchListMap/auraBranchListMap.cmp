@@ -13,8 +13,6 @@
     <aura:attribute name="center" type="SObject" access="global" />
     <aura:attribute name="jsLoaded" type="boolean" default="false" />
 
-    <aura:registerEvent name="selectSObject" type="ltng:selectSObject" />
-
     <aura:handler name="init" value="{!this}" action="{!c.handleInit}" />
 
     <lightning:messageChannel

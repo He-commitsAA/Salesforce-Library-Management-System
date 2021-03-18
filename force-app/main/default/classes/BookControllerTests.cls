@@ -114,12 +114,12 @@ public with sharing class BookControllerTests {
         System.runAs(librarian) {
             RecordType borrowerRecordType = [SELECT Id FROM RecordType WHERE SobjectType='Contact' AND Name='Borrower'];
             Contact borrower = [SELECT Id,Name,Card_Number__c FROM Contact WHERE RecordTypeId=:borrowerRecordType.Id];
-            Book_Copy__c bookCopy = [SELECT Id,Name,Book__c FROM Book_Copy__c];
+            Book_Copy__c bookCopy = [SELECT Id,Name,Book__c FROM Book_Copy__c LIMIT 1];
             Book__c book = [SELECT Id,Name FROM Book__c WHERE Id=:bookCopy.Book__c];
 
             String checkedOut = BookController.checkoutBook(bookCopy.Name, borrower.Card_Number__c);
 
-            String result = BookController.returnBook(bookCopy.id, true);
+            String result = BookController.returnBook(bookCopy.Name, true);
             System.assertEquals('Return successful.',result);
 
             Loan__c loan = [SELECT Borrower__c,Checkout__c,Due__c,Returned__c FROM Loan__c WHERE Book_Copy__c=:bookCopy.Id];

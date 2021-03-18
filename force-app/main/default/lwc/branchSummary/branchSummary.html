@@ -18,15 +18,7 @@
             </div>
         </template>
         <template if:false={branchId}>
-            <c-error-panel
-                friendly-message="Select a branch to see details"
-            ></c-error-panel>
-        </template>
-        <template if:true={branch.error}>
-            <c-error-panel
-                friendly-message="Error retrieving data"
-                errors={branch.error}
-            ></c-error-panel>
+            <span slot="title">Branch Summary</span>
         </template>
     </lightning-card>
 </template>
