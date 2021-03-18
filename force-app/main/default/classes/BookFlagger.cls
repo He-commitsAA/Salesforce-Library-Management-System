@@ -9,7 +9,6 @@ global class BookFlagger implements Database.Batchable<sObject>, Schedulable {
 
    global void execute(Database.BatchableContext BC, List<Book_Copy__c> bcs){
 
-       System.debug(bcs);
         for(Book_Copy__c bcopy: bcs){
             bcopy.flagged_for_removal__c = true;
         }

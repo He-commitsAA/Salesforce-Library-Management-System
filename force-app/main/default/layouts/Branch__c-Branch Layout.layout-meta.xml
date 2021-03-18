@@ -22,10 +22,6 @@
                 <behavior>Required</behavior>
                 <field>Address__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Required</behavior>
-                <field>Picture__c</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

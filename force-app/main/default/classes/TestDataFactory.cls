@@ -33,7 +33,8 @@ public inherited sharing class TestDataFactory {
         return new Branch__c(
             Name = 'Test',
             Location__Latitude__s = 0,
-            Location__Longitude__s = 0
+            Location__Longitude__s = 0,
+            Address__c = '1111 Tester Lane'
         );
     }
 

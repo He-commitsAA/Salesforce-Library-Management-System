@@ -1,6 +1,6 @@
 ({
     handleInit: function (component, event, helper) {
-        helper.getProperties(component);
+        helper.getBranches(component);
     },
 
     handleJSLoaded: function (component) {
