@@ -25,18 +25,19 @@ public inherited sharing class UserTriggerActions {
         update changedContacts;
     }
 
-    public static void createDeleteContactsForLibrarians(List<User> newusers, List<User> oldusers) {
+    public static void createDeleteContactsForLibrarians(List<User> newusers, Map<Id,User> oldusers) {
+        Profile librarianProfile = [SELECT Id FROM Profile WHERE Name='Librarian'];
         List<User> active = new List<User>();
         List<User> inactive = new List<User>();
 
         for (User u : newusers) {
-            if (u.IsActive) {
-                //todo: check if old is inactive
-                active.add(u);
-            }
-            else {
-                //todo: check if old is active
-                inactive.add(u);
+            if (u.ProfileId == librarianProfile.Id) {
+                if (u.IsActive && !oldusers.get(u.Id).IsActive) {
+                    active.add(u);
+                }
+                else if (!u.IsActive && oldusers.get(u.Id).IsActive) {
+                    inactive.add(u);
+                }
             }
         }
 
@@ -45,8 +46,6 @@ public inherited sharing class UserTriggerActions {
     }
 
     private static void deleteContactsForLibrarians(List<User> users) {
-        RecordType librarianRecordType = [SELECT Id FROM RecordType WHERE SobjectType='Contact' AND Name='Librarian'];
-        List<Contact> libContacts = [SELECT Id FROM Contact WHERE RecordTypeId = :librarianRecordType.Id];
-        //delete
+        System.enqueueJob(new LibrarianContactDeleterQueueable(users));
     }
 }
