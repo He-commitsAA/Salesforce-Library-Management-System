@@ -2,7 +2,6 @@ public with sharing class BranchController {
 
     @AuraEnabled(cacheable=true)
     public static List<Branch__c> getBranches() {
-        // Normalize inputs
 
         List<Branch__c> branches = [
             SELECT
