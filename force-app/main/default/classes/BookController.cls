@@ -34,7 +34,7 @@ public with sharing class BookController {
     public static string checkoutBook(String bookNo, String cardNo){
         Book_Copy__c copy;
         try {
-            copy = [SELECT Id,Branch__c,Borrower__c,Condition__c,Book__r.Name FROM Book_Copy__c WHERE Name=:bookNo];
+            copy = [SELECT Id,Branch__c,Borrower__c,Condition__c,Book__r.Name FROM Book_Copy__c WHERE Name=:bookNo FOR UPDATE];
         } catch (QueryException e) {
             throw new InputException('Invalid Book Serial Number');
         }
@@ -42,10 +42,9 @@ public with sharing class BookController {
             throw new InputException('Book is already checked out');
         }
 
-        RecordType borrowerRecordType = [SELECT Id FROM RecordType WHERE SobjectType='Contact' AND Name='Borrower'];
         Contact borrower;
         try {
-            borrower = [SELECT Id,Name FROM Contact WHERE Card_Number__c=:cardNo AND RecordTypeId=:borrowerRecordType.Id];
+            borrower = [SELECT Id,Name FROM Contact WHERE Card_Number__c=:cardNo AND RecordType.Name='Borrower'];
         } catch (QueryException e) {
             throw new InputException('Invalid Card Number');
         }
@@ -67,11 +66,22 @@ public with sharing class BookController {
         return UserInfo.getUserId();
     }
 
-    @AuraEnabled
-    public static void renewLoan(Id loanId, Integer days) {
-        Loan__c loan = [select id,Due__c from Loan__c where Id = :loanId LIMIT 1].get(0);
-        loan.Due__c = loan.Due__c.addDays(days);
+    private static Date renewLoan(Loan__c loan) {
+        loan.Due__c = loan.Due__c.addDays(14);
         update loan;
+        return loan.Due__c;
+    }
+
+    @AuraEnabled
+    public static Date renewLoan(Id loanId) {
+        Loan__c loan = [select id,Due__c from Loan__c where Id = :loanId FOR UPDATE];
+        return renewLoan(loan);
+    }
+
+    @AuraEnabled
+    public static Date renewBook(Id bookCopyId, Integer days){
+        Loan__c loan = [SELECT Id,Due__c FROM Loan__c WHERE Book_Copy__c=:bookCopyId AND Returned__c=false LIMIT 1 FOR UPDATE];
+        return renewLoan(loan);
     }
 
     @AuraEnabled
