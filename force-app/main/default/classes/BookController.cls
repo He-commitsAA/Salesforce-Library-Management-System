@@ -74,12 +74,12 @@ public with sharing class BookController {
 
     @AuraEnabled
     public static void renewLoan(Id loanId, Integer days) {
-        Loan__c loan = [select id,Due__c from Loan__c where Id = :loanId LIMIT 1].get(0);
+        Loan__c loan = [select id,Due__c,Book_Copy__c from Loan__c where Id = :loanId LIMIT 1].get(0);
         loan.Due__c = loan.Due__c.addDays(days);
         try{
             update loan;
         } catch (Exception e) {
-            Book_Copy__c copy = [SELECT id FROM Book_Copy__c WHERE id =: loan.Book_Copy__C LIMIT 1];
+            Book_Copy__c copy = [SELECT id,Holder__c FROM Book_Copy__c WHERE id =: loan.Book_Copy__C LIMIT 1];
             Contact holder = [SELECT name FROM Contact WHERE id =: copy.Holder__c LIMIT 1];
             throw new InputException('Book with hold cannot be renewed except by Holder: '+ holder.name);
         }
