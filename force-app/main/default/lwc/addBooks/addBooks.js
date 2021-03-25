@@ -1,6 +1,7 @@
 import { LightningElement, api, wire } from 'lwc';
 import addBooks from '@salesforce/apex/BookController.addBooks';
 import getUserId from '@salesforce/apex/BookController.getUserId';
+import getBranch from '@salesforce/apex/BranchHelper.getBranch';
 
 export default class AddBooks extends LightningElement {
     addSuccessful;
@@ -8,6 +9,7 @@ export default class AddBooks extends LightningElement {
     error;
     @api recordId;
     currentUser;
+    @wire(getBranch) branch;
 
     handleChange(event) {
         event.target.value = Math.floor(Math.abs(event.target.value));
@@ -16,7 +18,7 @@ export default class AddBooks extends LightningElement {
 
     createRecords() {
         this.addSuccessful = undefined;
-        addBooks({ bookId: this.recordId, quantity: this.quantity })
+        addBooks({ bookId: this.recordId, quantity: this.quantity, branchId: this.branch.Id })
             .then(() => {
                 this.addSuccessful = `Successfully added ${this.quantity} copies`;
                 this.error = undefined;

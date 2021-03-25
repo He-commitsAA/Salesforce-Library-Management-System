@@ -1,5 +1,5 @@
 global with sharing class BranchHelper {
-    
+    @AuraEnabled
     global static Branch__c getBranch(){
 
         Id myUserId = UserInfo.getUserId();
