@@ -1,0 +1,22 @@
+<template>
+    <template if:true={bookCopy.data}>
+        <lightning-card title="Book Copy Actions" icon-name="standard:article">
+            <div class="slds-m-around_small">
+                <p>{message}</p>
+                <template if:true={borrowerName}>
+                    <lightning-button label="Renew" variant="brand" title="Renew this book" onclick={renewBook}></lightning-button>
+                    <div class="slds-m-top_x-small">
+                        <lightning-button class="slds-m-top_x-small" label="Return" variant="brand" title="Return this book" onclick={returnBook}></lightning-button>
+                        <lightning-input type="checkbox" label="Damaged" name="damaged" onchange={toggleDamaged}></lightning-input>
+                    </div>
+                </template>
+                <template if:true={branchName}>
+                    <lightning-input label="Borrower Card Number" name="cardNo" onchange={setCardNo} onkeypress={handleKeyPress}></lightning-input>
+                    <div class="slds-m-top_x-small">
+                        <lightning-button label="Checkout" variant="brand" title="Checkout a book" onclick={checkoutBook}></lightning-button>
+                    </div>
+                </template>
+            </div>
+        </lightning-card>
+    </template>
+</template>

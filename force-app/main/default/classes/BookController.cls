@@ -79,7 +79,7 @@ public with sharing class BookController {
     }
 
     @AuraEnabled
-    public static Date renewBook(Id bookCopyId, Integer days){
+    public static Date renewBook(Id bookCopyId){
         Loan__c loan = [SELECT Id,Due__c FROM Loan__c WHERE Book_Copy__c=:bookCopyId AND Returned__c=false LIMIT 1 FOR UPDATE];
         return renewLoan(loan);
     }
