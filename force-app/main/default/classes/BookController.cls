@@ -56,7 +56,12 @@ public with sharing class BookController {
             copy.Condition__c = 'Used';
         }
 
-        Update copy;
+        try{
+            Update copy;
+        }catch(Exception e){
+            throw new InputException('Cannot checkout book on hold except to Holder.');
+        }
+        
         Insert new Loan__c(Book_Copy__c = copy.Id, Borrower__c = borrower.Id);
         
         return 'Checked out copy of ' + copy.Book__r.Name + ' to ' + borrower.Name;
