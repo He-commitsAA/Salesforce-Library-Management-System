@@ -3,3 +3,7 @@ table, th, td {
     border-collapse: collapse;
     text-align: center;
 }
+
+.renew {
+    --sds-c-button-brand-color-background:#1798c1;
+}
