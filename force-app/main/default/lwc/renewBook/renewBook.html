@@ -22,7 +22,7 @@
                                 <td>{loan.Serial}</td>
                                 <td>{loan.Member}</td>
                                 <td>{loan.Due__c}</td>
-                                <td><lightning-button name={loan.Id} icon-name="utility:refresh" onclick={renew}></lightning-button></td>
+                                <td><lightning-button class="renew" name={loan.Id} icon-name="utility:refresh" variant="brand" onclick={renew}></lightning-button></td>
                             </tr>
                         </template>
                     </table>
