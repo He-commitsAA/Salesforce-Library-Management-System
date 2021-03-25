@@ -25,14 +25,14 @@ export default class RenewBook extends LightningElement {
         //change shown loans to give best match to query by copy#, title, or borrower
         this.loans = [];
         for (let i in this.allLoans) {
-            let l = this.allLoans[i]; //todo: toLowerCase()
-            if (l.Title.includes(searchQuery) || l.Serial.includes(searchQuery) || l.Member.includes(searchQuery)) {
+            let l = this.allLoans[i];
+            if (l.Title.toLowerCase().includes(searchQuery.toLowerCase()) || l.Serial.toLowerCase().includes(searchQuery.toLowerCase()) || l.Member.toLowerCase().includes(searchQuery.toLowerCase())) {
                 this.loans.push(l);
             }
         }
-    } //todo: renew button blue background
+    }
 
-    renew(event) { //todo: make new date 2 digits
+    renew(event) {
         //renew the book
         let loanId = event.target.name;
         renewLoan({ loanId: loanId, days: extension })
@@ -42,7 +42,11 @@ export default class RenewBook extends LightningElement {
                     let loan = this.allLoans[i];
                     if (loan.Id === loanId) {
                         let newDate = addDays(loan.Due__c, extension);
-                        extendedDate = `${newDate.getFullYear()}-${newDate.getMonth()+1}-${newDate.getDate()}`;
+                        let newMonth = (newDate.getMonth()+1).toString();
+                        if (newMonth.length == 1) newMonth = '0' + newMonth;
+                        let date = newDate.getDate().toString();
+                        if (date.length == 1) date = '0' + date;
+                        extendedDate = `${newDate.getFullYear()}-${newMonth}-${date}`;
                         this.allLoans[i].Due__c = extendedDate;
                         break;
                     }
