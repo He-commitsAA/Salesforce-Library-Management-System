@@ -34,7 +34,7 @@ public with sharing class BookController {
     public static string checkoutBook(String bookNo, String cardNo){
         Book_Copy__c copy;
         try {
-            copy = [SELECT Id,Branch__c,Borrower__c,Condition__c,Book__r.Name FROM Book_Copy__c WHERE Name=:bookNo];
+            copy = [SELECT Id,Branch__c,Borrower__c,Condition__c,Book__r.Name,Holder__c FROM Book_Copy__c WHERE Name=:bookNo];
         } catch (QueryException e) {
             throw new InputException('Invalid Book Serial Number');
         }
@@ -56,13 +56,13 @@ public with sharing class BookController {
             copy.Condition__c = 'Used';
         }
 
+        Update copy;
         try{
-            Update copy;
-        }catch(Exception e){
-            throw new InputException('Cannot checkout book on hold except to Holder.');
+            Insert new Loan__c(Book_Copy__c = copy.Id, Borrower__c = borrower.Id);
+        } catch (Exception e) {
+            Contact holder = [SELECT name FROM Contact WHERE id =: copy.Holder__c LIMIT 1];
+            throw new InputException('Book with hold cannot be checked out except by Holder: '+ holder.name);
         }
-        
-        Insert new Loan__c(Book_Copy__c = copy.Id, Borrower__c = borrower.Id);
         
         return 'Checked out copy of ' + copy.Book__r.Name + ' to ' + borrower.Name;
     }
