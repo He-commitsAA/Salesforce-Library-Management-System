@@ -10,6 +10,7 @@ import BRANCHSELECTEDMC from '@salesforce/messageChannel/BranchSelected__c';
 import NAME_FIELD from '@salesforce/schema/Branch__c.Name';
 import PHONE_NUMBER_FIELD from '@salesforce/schema/Branch__c.Phone__c';
 import ADDRESS_FIELD from '@salesforce/schema/Branch__c.Address__c';
+import PICTURE_FIELD from '@salesforce/schema/Branch__c.Picture__c';
 
 export default class BranchSummary extends NavigationMixin(LightningElement) {
     branchId;
@@ -21,7 +22,7 @@ export default class BranchSummary extends NavigationMixin(LightningElement) {
 
     @wire(getRecord, {
         recordId: '$branchId',
-        fields: [NAME_FIELD]
+        fields: [NAME_FIELD,PICTURE_FIELD]
     })
     branch;
 
@@ -36,6 +37,10 @@ export default class BranchSummary extends NavigationMixin(LightningElement) {
 
     get branchName() {
         return getFieldValue(this.branch.data, NAME_FIELD);
+    }
+
+    get pictureURL() {
+        return getFieldValue(this.branch.data, PICTURE_FIELD);
     }
 
     connectedCallback() {
