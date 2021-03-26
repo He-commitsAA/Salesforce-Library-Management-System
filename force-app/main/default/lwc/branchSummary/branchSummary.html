@@ -8,6 +8,11 @@
                 onclick={handleNavigateToRecord}
             ></lightning-button-icon>
             <div class="slds-var-m-horizontal_medium">
+                <img
+                src={pictureURL}
+                alt="Branch picture"
+                class="slds-var-m-bottom_x-small"
+                />
                 <lightning-record-form
                     object-api-name="Branch__c"
                     record-id={branchId}
