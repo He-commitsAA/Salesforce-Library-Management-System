@@ -68,7 +68,7 @@ export default class BookCopyManagement extends LightningElement {
     }
 
     toggleDamaged(event) {
-        this.damaged = event.target.value;
+        this.damaged = event.target.checked;
     }
 
     setCardNo(event) {
@@ -96,7 +96,7 @@ export default class BookCopyManagement extends LightningElement {
                 variant: 'error'
             }))
             .finally(() => {
-                this.template.querySelectorAll('lightning-input').forEach(element => element.value = null);
+                this.template.querySelectorAll('lightning-input[type="text"]').forEach(element => element.value = null);
                 this.dispatchEvent(toast);
                 refreshApex(this.bookCopy);
             });
@@ -136,7 +136,7 @@ export default class BookCopyManagement extends LightningElement {
                 variant: 'error'
             }))
             .finally(() => {
-                this.template.querySelectorAll('lightning-input').forEach(element => element.value = null);
+                this.template.querySelectorAll('lightning-input[type="checkbox"]').forEach(element => element.checked = false);
                 this.dispatchEvent(toast);
                 refreshApex(this.bookCopy);
             });
