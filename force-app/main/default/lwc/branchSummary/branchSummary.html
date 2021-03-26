@@ -13,12 +13,18 @@
                     record-id={branchId}
                     fields={branchFields}
                     columns="2"
+                    mode="readonly"
                 >
                 </lightning-record-form>
             </div>
         </template>
         <template if:false={branchId}>
             <span slot="title">Branch Summary</span>
+            <lightning-card>
+                <div class="slds-var-m-horizontal_medium" style="font-size:medium">
+                    Welcome. To show information on a branch, click a marker on the map.
+                </div>
+            </lightning-card>
         </template>
     </lightning-card>
 </template>

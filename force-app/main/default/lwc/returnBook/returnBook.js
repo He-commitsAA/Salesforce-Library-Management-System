@@ -27,7 +27,7 @@ export default class ReturnBook extends LightningElement {
             }))
             .catch(error => toast = new ShowToastEvent({
                 title: 'Return Failed',
-                message: this.damaged,
+                message: error.body.message,
                 variant: 'error'
             }))
             .finally(() => {
