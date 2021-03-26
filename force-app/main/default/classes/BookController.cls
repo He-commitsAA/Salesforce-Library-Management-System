@@ -74,7 +74,13 @@ public with sharing class BookController {
 
     private static Date renewLoan(Loan__c loan) {
         loan.Due__c = loan.Due__c.addDays(14);
-        update loan;
+        try{
+            update loan;
+        } catch (Exception e) {
+            Book_Copy__c copy = [SELECT id,Holder__c FROM Book_Copy__c WHERE id =: loan.Book_Copy__C LIMIT 1];
+            Contact holder = [SELECT name FROM Contact WHERE id =: copy.Holder__c LIMIT 1];
+            throw new InputException('Book with hold cannot be renewed except by Holder: '+ holder.name);
+        }
         return loan.Due__c;
     }
 
