@@ -21,10 +21,11 @@ public with sharing class BookController {
     }
 
     @AuraEnabled
-    public static void addBooks(Id bookId, Integer quantity, Id branchId) {
+    public static void addBooks(Id bookId, Integer quantity) {
+        Branch__c branch = BranchHelper.getBranch();
         List<Book_Copy__c> copies = new List<Book_Copy__c>();
         for (Integer i=0; i<quantity; i++) {
-            Book_Copy__c copy = new Book_Copy__c(Condition__c='New', Book__c=bookId, Branch__c=branchId);
+            Book_Copy__c copy = new Book_Copy__c(Condition__c='New', Book__c=bookId, Branch__c=branch.Id);
             copies.add(copy);
         }
         insert copies;
