@@ -47,13 +47,23 @@ export default class BookCopyManagement extends LightningElement {
         }
     }
 
+    get title() {
+        if (this.borrowerName) {
+            return 'Renew/Return Book';
+        } else if (this.branchName) {
+            return 'Checkout Book';
+        } else {
+            return 'Book Copy Actions';
+        }
+    }
+
     get message() {
         if (this.borrowerName) {
             return `This book is loaned out to ${this.borrowerName}.`;
         } else if (this.branchName) {
             return `This book is currently at ${this.branchName}.`;
         } else {
-            return 'Please Wait';
+            return 'Please put in a branch or borrower for this book copy.';
         }
     }
 

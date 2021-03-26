@@ -1,6 +1,6 @@
 <template>
     <template if:true={bookCopy.data}>
-        <lightning-card title="Book Copy Actions" icon-name="standard:article">
+        <lightning-card title={title} icon-name="standard:article">
             <div class="slds-m-around_small">
                 <p>{message}</p>
                 <template if:true={borrowerName}>
