@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Loans_on_Held_Books</fullName>
+    <active>true</active>
+    <description>Prevents loans from being checked out or renewed on held books for anyone except the Holder.</description>
+    <errorConditionFormula>IF(  Book_Copy__r.Holder__c  &lt;&gt; null &amp;&amp;  Borrower__c  &lt;&gt;  Book_Copy__r.Holder__c  &amp;&amp;  Returned__c  = FALSE , true, false)</errorConditionFormula>
+    <errorDisplayField>Borrower__c</errorDisplayField>
+    <errorMessage>Cannot create or extend loan on held book for anyone but Holder.</errorMessage>
+</ValidationRule>

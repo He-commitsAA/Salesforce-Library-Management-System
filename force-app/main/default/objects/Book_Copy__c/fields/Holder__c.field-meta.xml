@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Holder__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <inlineHelpText>If this field is filled in, then the book copy has a hold on it by a Borrower and should not be renewed or checked out to anyone but that Borrower.</inlineHelpText>
+    <label>Holder</label>
+    <referenceTo>Contact</referenceTo>
+    <relationshipLabel>Book Copies (Contact)</relationshipLabel>
+    <relationshipName>Book_Copies1</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

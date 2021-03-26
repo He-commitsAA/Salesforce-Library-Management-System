@@ -21,10 +21,11 @@ public with sharing class BookController {
     }
 
     @AuraEnabled
-    public static void addBooks(Id bookId, Integer quantity, Id branchId) {
+    public static void addBooks(Id bookId, Integer quantity) {
+        Branch__c branch = BranchHelper.getBranch();
         List<Book_Copy__c> copies = new List<Book_Copy__c>();
         for (Integer i=0; i<quantity; i++) {
-            Book_Copy__c copy = new Book_Copy__c(Condition__c='New', Book__c=bookId, Branch__c=branchId);
+            Book_Copy__c copy = new Book_Copy__c(Condition__c='New', Book__c=bookId, Branch__c=branch.Id);
             copies.add(copy);
         }
         insert copies;
@@ -34,7 +35,7 @@ public with sharing class BookController {
     public static string checkoutBook(String bookNo, String cardNo){
         Book_Copy__c copy;
         try {
-            copy = [SELECT Id,Branch__c,Borrower__c,Condition__c,Book__r.Name FROM Book_Copy__c WHERE Name=:bookNo FOR UPDATE];
+            copy = [SELECT Id,Branch__c,Borrower__c,Condition__c,Book__r.Name,Holder__c FROM Book_Copy__c WHERE Name=:bookNo];
         } catch (QueryException e) {
             throw new InputException('Invalid Book Serial Number');
         }
@@ -56,7 +57,12 @@ public with sharing class BookController {
         }
 
         Update copy;
-        Insert new Loan__c(Book_Copy__c = copy.Id, Borrower__c = borrower.Id);
+        try{
+            Insert new Loan__c(Book_Copy__c = copy.Id, Borrower__c = borrower.Id);
+        } catch (Exception e) {
+            Contact holder = [SELECT name FROM Contact WHERE id =: copy.Holder__c LIMIT 1];
+            throw new InputException('Book with hold cannot be checked out except by Holder: '+ holder.name);
+        }
         
         return 'Checked out copy of ' + copy.Book__r.Name + ' to ' + borrower.Name;
     }
@@ -68,7 +74,13 @@ public with sharing class BookController {
 
     private static Date renewLoan(Loan__c loan) {
         loan.Due__c = loan.Due__c.addDays(14);
-        update loan;
+        try{
+            update loan;
+        } catch (Exception e) {
+            Book_Copy__c copy = [SELECT id,Holder__c FROM Book_Copy__c WHERE id =: loan.Book_Copy__C LIMIT 1];
+            Contact holder = [SELECT name FROM Contact WHERE id =: copy.Holder__c LIMIT 1];
+            throw new InputException('Book with hold cannot be renewed except by Holder: '+ holder.name);
+        }
         return loan.Due__c;
     }
 

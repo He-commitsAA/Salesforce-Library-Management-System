@@ -1,4 +1,5 @@
 import { LightningElement, wire, track } from 'lwc';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getCheckedOutBooks from '@salesforce/apex/BookController.getCheckedOutBooks';
 import getLoans from '@salesforce/apex/BookController.getLoans';
 import getBookList from '@salesforce/apex/BookController.getBookList';
@@ -44,9 +45,13 @@ export default class RenewBook extends LightningElement {
                     }
                 }
                 this.loans = [...this.loans];
-            }).catch((error) => {
-                console.log(error);
+            }).catch(error => {toast = new ShowToastEvent({
+                title: 'Renew Failed',
+                message: error.body.message,
+                variant: 'error'
             });
+            this.dispatchEvent(toast);}
+            )
     }
 
     @wire(getBookList)
