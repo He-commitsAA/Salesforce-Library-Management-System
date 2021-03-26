@@ -2,6 +2,7 @@
 <RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Borrower</fullName>
     <active>true</active>
+    <compactLayoutAssignment>Borrower_Contact_Layout</compactLayoutAssignment>
     <label>Borrower</label>
     <picklistValues>
         <picklist>LeadSource</picklist>

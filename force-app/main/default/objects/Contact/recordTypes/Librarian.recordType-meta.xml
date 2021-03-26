@@ -2,6 +2,7 @@
 <RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Librarian</fullName>
     <active>true</active>
+    <compactLayoutAssignment>Librarian_Compact_Layout</compactLayoutAssignment>
     <label>Librarian</label>
     <picklistValues>
         <picklist>LeadSource</picklist>
