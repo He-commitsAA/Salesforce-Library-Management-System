@@ -6,14 +6,6 @@ import getBookList from '@salesforce/apex/BookController.getBookList';
 import getBorrowers from '@salesforce/apex/BookController.getBorrowers';
 import renewLoan from '@salesforce/apex/BookController.renewLoan';
 
-const extension = 14;
-
-function addDays(date, days) {
-    var result = new Date(date);
-    result.setDate(result.getDate()+1 + days);
-    return result;
-}
-
 export default class RenewBook extends LightningElement {
     @track loans;
     allLoans;
@@ -36,19 +28,11 @@ export default class RenewBook extends LightningElement {
     renew(event) {
         //renew the book
         let loanId = event.target.name;
-        var toast;
-        renewLoan({ loanId: loanId, days: extension })
-            .then(() => {
-                let extendedDate = undefined;
+        renewLoan({ loanId: loanId })
+            .then(extendedDate => {
                 for (let i in this.allLoans) {
                     let loan = this.allLoans[i];
                     if (loan.Id === loanId) {
-                        let newDate = addDays(loan.Due__c, extension);
-                        let newMonth = (newDate.getMonth()+1).toString();
-                        if (newMonth.length == 1) newMonth = '0' + newMonth;
-                        let date = newDate.getDate().toString();
-                        if (date.length == 1) date = '0' + date;
-                        extendedDate = `${newDate.getFullYear()}-${newMonth}-${date}`;
                         this.allLoans[i].Due__c = extendedDate;
                         break;
                     }

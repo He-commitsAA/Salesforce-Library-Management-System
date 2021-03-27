@@ -43,6 +43,11 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>bookCopyManagement</componentName>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
                 <componentInstanceProperties>
                     <name>relatedListComponentOverride</name>
                     <value>NONE</value>
