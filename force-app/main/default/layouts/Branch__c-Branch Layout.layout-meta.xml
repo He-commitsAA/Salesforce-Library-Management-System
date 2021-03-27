@@ -22,8 +22,6 @@
                 <behavior>Required</behavior>
                 <field>Address__c</field>
             </layoutItems>
-        </layoutColumns>
-        <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>OwnerId</field>
