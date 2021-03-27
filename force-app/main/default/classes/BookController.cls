@@ -35,7 +35,7 @@ public with sharing class BookController {
     public static string checkoutBook(String bookNo, String cardNo){
         Book_Copy__c copy;
         try {
-            copy = [SELECT Id,Branch__c,Borrower__c,Condition__c,Book__r.Name FROM Book_Copy__c WHERE Name=:bookNo FOR UPDATE];
+            copy = [SELECT Id,Branch__c,Borrower__c,Condition__c,Book__r.Name,Holder__c FROM Book_Copy__c WHERE Name=:bookNo FOR UPDATE];
         } catch (QueryException e) {
             throw new InputException('Invalid Book Serial Number');
         }
