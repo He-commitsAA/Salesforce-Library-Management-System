@@ -21,7 +21,8 @@ export default class RenewBook extends LightningElement {
             for (let i in this.allLoans) {
                 let l = this.allLoans[i];
                 if (l.Title.toLowerCase().includes(searchQuery.toLowerCase()) || l.Serial.toLowerCase().includes(searchQuery.toLowerCase()) || l.Member.toLowerCase().includes(searchQuery.toLowerCase())) {
-                    this.loans.push(l);
+                    if (l !== undefined)
+                        this.loans.push(l);
                 }
             }
         }
