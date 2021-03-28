@@ -14,7 +14,7 @@ export default class RenewBook extends LightningElement {
     borrowers;
 
     handleChange(event) {
-        if (allLoans) {
+        if (this.allLoans) {
             let searchQuery = event.target.value;
             //change shown loans to give best match to query by copy#, title, or borrower
             this.loans = [];
@@ -108,12 +108,18 @@ export default class RenewBook extends LightningElement {
             this.allLoans = [];
             for (let i in result.data) {
                 let loan = result.data[i];
-                this.allLoans.push({});
-                Object.assign(this.allLoans[i], loan); //copy the entire list to allow for edits
+                let newLoan = {};
+                Object.assign(newLoan, loan); //copy the entire list to allow for edits
                 let copy = this.copies.get(loan.Book_Copy__c);
-                this.allLoans[i].Serial = copy.Name;
-                this.allLoans[i].Title = this.allBooks.get(copy.Book__c).Name;
-                this.allLoans[i].Member = this.borrowers.get(loan.Borrower__c).Name;
+                try {
+                    newLoan.Serial = copy.Name;
+                    newLoan.Title = this.allBooks.get(copy.Book__c).Name;
+                    newLoan.Member = this.borrowers.get(loan.Borrower__c).Name;
+                    this.allLoans.push(newLoan);
+                }
+                catch (e) {
+                    continue;
+                }
             }
         }
         else {
