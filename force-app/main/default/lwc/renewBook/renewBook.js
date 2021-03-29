@@ -51,7 +51,7 @@ export default class RenewBook extends LightningElement {
                     }
                 }
                 this.loans = [...this.loans];
-            }).catch(error => {toast = new ShowToastEvent({
+            }).catch(error => {const toast = new ShowToastEvent({
                 title: 'Renew Failed',
                 message: error.body.message,
                 variant: 'error'
