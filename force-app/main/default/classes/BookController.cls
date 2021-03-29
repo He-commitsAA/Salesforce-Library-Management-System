@@ -86,7 +86,7 @@ public with sharing class BookController {
 
     @AuraEnabled
     public static Date renewLoan(Id loanId) {
-        Loan__c loan = [select id,Due__c from Loan__c where Id = :loanId FOR UPDATE];
+        Loan__c loan = [select id,Due__c,Book_Copy__c from Loan__c where Id = :loanId FOR UPDATE];
         return renewLoan(loan);
     }
 
