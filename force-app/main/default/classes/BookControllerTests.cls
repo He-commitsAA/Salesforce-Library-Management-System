@@ -131,4 +131,14 @@ public with sharing class BookControllerTests {
             System.assertEquals('Damaged',bookCopy.Condition__c);
         }
     }
+
+    @isTest
+    public static void getBookAvailabilityTest(){
+        Branch__c branch = [SELECT Name FROM Branch__c LIMIT 1];
+        Book__c book = [SELECT Id FROM Book__c LIMIT 1];
+        List<AggregateResult> results = BookController.getBookAvailability(book.Id);
+
+        System.assertEquals(branch.Name, results[0].get('Name'));
+        System.assertEquals(1, results[0].get('Copies'));
+    }
 }

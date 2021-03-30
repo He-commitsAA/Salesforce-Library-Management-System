@@ -120,4 +120,9 @@ public with sharing class BookController {
         update copy;
         return 'Return successful.';
     }
+
+    @AuraEnabled
+    public static List<AggregateResult> getBookAvailability(Id bookId){
+        return [SELECT count(Name) Copies, Branch__r.Name FROM Book_Copy__c WHERE Book__c=:bookId GROUP BY Branch__r.Name ORDER BY Branch__r.Name DESC];
+    }
 }
