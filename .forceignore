@@ -6,6 +6,7 @@ package.xml
 
 #misc files
 force-app\main\default\profiles\Digital Library Profile.profile-meta.xml
+force-app\main\default\appMenus\AppSwitcher.appMenu-meta.xml
 
 # LWC configuration files
 **/jsconfig.json
