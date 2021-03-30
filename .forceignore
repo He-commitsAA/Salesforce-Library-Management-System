@@ -4,6 +4,9 @@
 
 package.xml
 
+#misc files
+force-app\main\default\profiles\Digital Library Profile.profile-meta.xml
+
 # LWC configuration files
 **/jsconfig.json
 **/.eslintrc.json
