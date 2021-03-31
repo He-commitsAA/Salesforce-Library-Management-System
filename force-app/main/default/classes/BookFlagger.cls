@@ -31,13 +31,8 @@ global class BookFlagger implements Database.Batchable<sObject>, Schedulable {
     mail.setToAddresses(toAddresses);
     mail.setSubject('New Books Flagged for Removal');
     mail.setSaveAsActivity(false);
-    mail.setPlainTextBody
-       ('Hello Librarians,\n'+
-        'This is a reminder that books have just been flagged for removal.\n'+
-        'Please check your assigned Task on the Library Management App for a list of books to watch out for.\n'+
-        '\n'+
-        'Signed,\n'+
-        'Library Management App Administrator');
+    Id templateId= [SELECT id FROM EmailTemplate WHERE name LIKE 'Librarian Email Template'].id;
+    mail.setTemplateId(templateId);
     Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail }); 
    }
 
