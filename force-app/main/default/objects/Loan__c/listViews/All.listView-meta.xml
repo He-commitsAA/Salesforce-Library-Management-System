@@ -3,10 +3,10 @@
     <fullName>All</fullName>
     <columns>NAME</columns>
     <columns>Book_Copy__c</columns>
+    <columns>Book_Title__c</columns>
     <columns>Borrower__c</columns>
     <columns>Checkout__c</columns>
     <columns>Due__c</columns>
-    <columns>Overdue__c</columns>
     <columns>Returned__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>

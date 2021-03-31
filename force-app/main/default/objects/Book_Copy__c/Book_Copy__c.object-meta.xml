@@ -156,7 +156,7 @@
     <label>Book Copy</label>
     <nameField>
         <displayFormat>A-{0000}</displayFormat>
-        <label>Serial Number</label>
+        <label>Call Number</label>
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Book Copies</pluralLabel>
