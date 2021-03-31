@@ -106,7 +106,7 @@ public with sharing class BookController {
             throw new InputException('Invalid serial number');
         }
         try {
-            loan = [SELECT Id,Name,Borrower__c,Book_Copy__c,Returned__c FROM Loan__c WHERE Book_copy__c=:copy.id LIMIT 1 FOR UPDATE];
+            loan = [SELECT Id,Name,Borrower__c,Book_Copy__c,Returned__c FROM Loan__c WHERE Book_copy__c =:copy.id AND Returned__c=false LIMIT 1];
         } catch (QueryException e) {
             throw new InputException('Cannot find loan');
         }
