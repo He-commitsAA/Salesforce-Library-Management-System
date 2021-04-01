@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Books_in_Library</fullName>
+    <columns>NAME</columns>
+    <columns>Book__c</columns>
+    <columns>Branch__c</columns>
+    <columns>Condition__c</columns>
+    <columns>Holder__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Branch__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <label>Books in Library</label>
+</ListView>
