@@ -54,6 +54,19 @@
         <layoutColumns/>
         <style>CustomLinks</style>
     </layoutSections>
+    <platformActionList>
+        <actionListContext>Record</actionListContext>
+        <platformActionListItems>
+            <actionName>Edit</actionName>
+            <actionType>StandardButton</actionType>
+            <sortOrder>0</sortOrder>
+        </platformActionListItems>
+        <platformActionListItems>
+            <actionName>Delete</actionName>
+            <actionType>StandardButton</actionType>
+            <sortOrder>1</sortOrder>
+        </platformActionListItems>
+    </platformActionList>
     <relatedLists>
         <fields>VERSION.TITLE</fields>
         <fields>VERSION.CREATED_DATE</fields>
@@ -68,6 +81,8 @@
     <relatedLists>
         <fields>NAME</fields>
         <fields>Book__c</fields>
+        <fields>Condition__c</fields>
+        <fields>Flagged_for_Removal__c</fields>
         <relatedList>Book_Copy__c.Branch__c</relatedList>
     </relatedLists>
     <relatedLists>
