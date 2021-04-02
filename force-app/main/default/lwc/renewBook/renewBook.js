@@ -51,6 +51,13 @@ export default class RenewBook extends LightningElement {
                     }
                 }
                 this.loans = [...this.loans];
+                let toast = new ShowToastEvent({
+                    title: `Due date set to ${extendedDate}`,
+                    message: 'Renew successful',
+                    variant: 'success'
+                });
+                this.dispatchEvent(toast);
+
             }).catch(error => {const toast = new ShowToastEvent({
                 title: 'Renew Failed',
                 message: error.body.message,
