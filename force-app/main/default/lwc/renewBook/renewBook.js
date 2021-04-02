@@ -11,7 +11,7 @@ export default class RenewBook extends LightningElement {
     allLoans;
     copies;
     allBooks;
-    borrowers; //todo: make button smaller and icon centered. add toast on renewal
+    borrowers;
 
     handleChange(event) {
         if (this.allLoans) {
@@ -57,7 +57,7 @@ export default class RenewBook extends LightningElement {
                     variant: 'success'
                 });
                 this.dispatchEvent(toast);
-                
+
             }).catch(error => {const toast = new ShowToastEvent({
                 title: 'Renew Failed',
                 message: error.body.message,
