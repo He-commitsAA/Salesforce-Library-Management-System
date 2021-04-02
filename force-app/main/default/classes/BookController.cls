@@ -73,7 +73,7 @@ public with sharing class BookController {
     }
 
     private static Date renewLoan(Loan__c loan) {
-        loan.Due__c = loan.Due__c.addDays(14);
+        loan.Due__c = Date.today().addDays(14);
         try{
             update loan;
         } catch (Exception e) {

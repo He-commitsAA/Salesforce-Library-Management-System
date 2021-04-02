@@ -1,7 +1,7 @@
 {
   "orgName": "Salesforce Library Management System",
   "edition": "Developer",
-  "features": [],
+  "features": ["ServiceCloud"],
   "settings": {
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
