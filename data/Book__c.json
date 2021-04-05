@@ -1,0 +1,85 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Book__c",
+                "referenceId": "Book__cRef1"
+            },
+            "Name": "The Devil in the White City",
+            "Author__c": "Erik Larson",
+            "Published__c": "2021-03-30"
+        },
+        {
+            "attributes": {
+                "type": "Book__c",
+                "referenceId": "Book__cRef2"
+            },
+            "Name": "Harry Potter and the Deathly Hallows",
+            "Author__c": "J.K. Rowling",
+            "Published__c": "2021-03-02"
+        },
+        {
+            "attributes": {
+                "type": "Book__c",
+                "referenceId": "Book__cRef3"
+            },
+            "Name": "Harry Potter and the Prisoner of Azkaban",
+            "Author__c": "J.K. Rowling",
+            "Published__c": "2021-03-03"
+        },
+        {
+            "attributes": {
+                "type": "Book__c",
+                "referenceId": "Book__cRef4"
+            },
+            "Name": "The Ersatz Elevator",
+            "Author__c": "Lemony Snicket",
+            "Published__c": "2021-02-02"
+        },
+        {
+            "attributes": {
+                "type": "Book__c",
+                "referenceId": "Book__cRef5"
+            },
+            "Name": "Pride and Prejudice",
+            "Author__c": "Jane Austen",
+            "Published__c": "2021-01-09"
+        },
+        {
+            "attributes": {
+                "type": "Book__c",
+                "referenceId": "Book__cRef6"
+            },
+            "Name": "Charlie and the Great Glass Elevator",
+            "Author__c": "Roald Dahl",
+            "Published__c": "2021-03-26"
+        },
+        {
+            "attributes": {
+                "type": "Book__c",
+                "referenceId": "Book__cRef7"
+            },
+            "Name": "Principles of Mathematical Analysis",
+            "Author__c": "Walter Rudin",
+            "Published__c": "2021-02-09"
+        },
+        {
+            "attributes": {
+                "type": "Book__c",
+                "referenceId": "Book__cRef8"
+            },
+            "Name": "Charlotte's Web",
+            "Author__c": "E.B. White",
+            "Published__c": "2021-03-08"
+        },
+        {
+            "attributes": {
+                "type": "Book__c",
+                "referenceId": "Book__cRef9"
+            },
+            "Name": "Isaac's Storm",
+            "Author__c": "Erik Larson",
+            "Published__c": "2021-02-10"
+        }
+    ]
+}
