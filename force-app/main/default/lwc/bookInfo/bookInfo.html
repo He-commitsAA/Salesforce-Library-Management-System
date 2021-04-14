@@ -2,7 +2,7 @@
     <div if:true={bookInfo}>
         <lightning-card>
             <div class="container slds-m-around_small">
-                <div class="image">
+                <div if:true={bookInfo.volumeInfo.imageLinks} class="image">
                     <img src={bookInfo.volumeInfo.imageLinks.thumbnail}>
                 </div>
                 <div class="information">
