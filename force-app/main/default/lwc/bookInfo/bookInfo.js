@@ -6,7 +6,6 @@ const FIELDS = [
     'Book__c.Author__c',
     'Book__c.ISBN__c'
 ];
-
 export default class BookInfo extends LightningElement {
     @api recordId;
 
@@ -17,7 +16,8 @@ export default class BookInfo extends LightningElement {
         console.log(result);
         if (result.data) {
             const bookFields = result.data.fields;
-            var url = `https://www.googleapis.com/books/v1/volumes?q=`;
+            
+            var url = 'https://www.googleapis.com/books/v1/volumes?q=';
             if (bookFields.ISBN__c.value) {
                 url += `isbn:${bookFields.ISBN__c.value}`;
             } else if (bookFields.Name.value) {
@@ -25,7 +25,11 @@ export default class BookInfo extends LightningElement {
                 if (bookFields.Author__c.value) {
                     url += `+inauthor:${bookFields.Author__c.value}`;
                 }
+            } else {
+                //if the book somehow does not have a title or isbn, don't bother sending the request
+                return;
             }
+
             fetch(url)
                 .then(response => response.json())
                 .then(data => this.bookInfo = data.items[0]);
