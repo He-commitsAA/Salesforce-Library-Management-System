@@ -8,10 +8,8 @@
             "Name": "Arlington Square Municipal Library",
             "Address__c": "300 West Avenue, Arlington, VA 22125",
             "Phone__c": "(703) 281-6824",
-            "Location__c": {
-                "latitude": 38.8816,
-                "longitude": -77.091
-            },
+            "Location__Latitude__s": 38.8816,
+            "Location__Longitude__s": -77.091,
             "Picture__c": "https://i.imgur.com/cvWkuRy.png"
         },
         {
@@ -22,10 +20,8 @@
             "Name": "Davidson Memorial Library",
             "Address__c": "1700 Pennsylvania Ave, Washington, DC 22348",
             "Phone__c": "(202) 488-6465",
-            "Location__c": {
-                "latitude": 39.0068,
-                "longitude": -76.7791
-            },
+            "Location__Latitude__s": 39.0068,
+            "Location__Longitude__s": -76.7791,
             "Picture__c": "https://i.imgur.com/c9rRqrA.png"
         },
         {
@@ -36,10 +32,8 @@
             "Name": "American University Graduate Library",
             "Address__c": "700 Smithson Avenue, Washington, DC 21293",
             "Phone__c": "(202) 212-9023",
-            "Location__c": {
-                "latitude": 38.8882,
-                "longitude": -77.0199
-            },
+            "Location__Latitude__s": 38.8882,
+            "Location__Longitude__s": -77.0199,
             "Picture__c": "https://events.slcpl.org/images/slideshow/slcpl/MainLibrary12.jpg"
         },
         {
@@ -50,10 +44,8 @@
             "Name": "Chesapeake Library",
             "Address__c": "1700 Pennsylvania Ave, Washington, DC 22812",
             "Phone__c": "(202) 488-6465",
-            "Location__c": {
-                "latitude": 39.0182,
-                "longitude": -77.2086
-            },
+            "Location__Latitude__s": 39.0182,
+            "Location__Longitude__s": -77.2086,
             "Picture__c": "https://i.imgur.com/NCioTFI.png"
         },
         {
@@ -64,10 +56,8 @@
             "Name": "Jefferson-Smith Regional Library",
             "Address__c": "1270 Beulah Road, Annandale, VA 22128",
             "Phone__c": "(703) 919-2394",
-            "Location__c": {
-                "latitude": 38.8304,
-                "longitude": -77.1964
-            },
+            "Location__Latitude__s": 38.8304,
+            "Location__Longitude__s": -77.1964,
             "Picture__c": "https://i.imgur.com/c9rRqrA.png"
         },
         {
@@ -78,10 +68,8 @@
             "Name": "McLean Pimmit",
             "Address__c": "703 Fairfax Lane, Washington, DC 22123",
             "Phone__c": "(202) 488-6465",
-            "Location__c": {
-                "latitude": 38.8765,
-                "longitude": -77.0006
-            },
+            "Location__Latitude__s": 38.8765,
+            "Location__Longitude__s": -77.0006,
             "Picture__c": "https://i.imgur.com/0ZWJlty.png"
         },
         {
@@ -92,10 +80,8 @@
             "Name": "College Park City Library",
             "Address__c": "1700 Pennsylvania Ave, Washington, DC 22128",
             "Phone__c": "(202) 488-6465",
-            "Location__c": {
-                "latitude": 38.9897,
-                "longitude": -76.9378
-            },
+            "Location__Latitude__s": 38.9897,
+            "Location__Longitude__s": -76.9378,
             "Picture__c": "https://i.imgur.com/nvcdWhe.png"
         }
     ]
