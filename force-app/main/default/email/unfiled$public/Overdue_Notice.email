@@ -1,0 +1,184 @@
+<messaging:emailTemplate subject="Overdue Books" recipientType="Contact" relatedToType="Contact">
+<messaging:htmlEmailBody > 
+        <html>
+            <body>
+            <table border="0" cellpadding="0" cellspacing="0" style="border:none;font-family:Arial;font-size:17px;line-height:1.5;max-width:800px" width="" id="m_4853045261008218491wrapper">
+  <thead>
+    
+<tr>
+      <th align="left" style="padding:0;width:100%" colspan="5">
+        <img alt="" src="https://i.imgur.com/8DresUb.png#https://i.imgur.com/8DresUb.png" style="vertical-align:top;width:100%" class="CToWUd a6T" tabindex="0"><div class="a6S" dir="ltr" style="opacity: 0.01; left: 388px; top: 324px;"><div id=":qw" class="T-I J-J5-Ji aQv T-I-ax7 L3 a5q" role="button" tabindex="0" aria-label="Download attachment " data-tooltip-class="a1V" data-tooltip="Download"><div class="akn"><div class="aSK J-J5-Ji aYr"></div></div></div></div>
+        </img>
+      </th>
+    
+</tr>
+  </thead>
+  <tbody>
+    
+    
+<tr>
+    
+<td align="left" bgcolor="#9C78FF" style="background:#9c78ff;padding:0">&nbsp;
+</td>
+      
+<td align="left" bgcolor="#ffffff" style="background:#ffffff;padding:0" colspan="3">&nbsp;
+</td>
+      
+<td align="left" bgcolor="#9C78FF" style="background:#9c78ff;padding:0">&nbsp;
+</td>
+    
+</tr>
+    
+    
+    
+<tr>    
+    
+<td align="left" bgcolor="#9C78FF" style="background:#9c78ff;padding:0;width:1%" width="1%">&nbsp;
+</td>
+      
+<td align="left" bgcolor="#ffffff" style="background:#ffffff;padding:0;width:5%" width="5%">&nbsp;
+</td>
+      
+<td align="left" bgcolor="#ffffff" style="background:#ffffff;padding:0;width:88%" width="88%">
+            
+<p>
+            
+</p>
+        
+<p>Hello {!relatedTo.FirstName},
+</p>
+
+<p>This is a reminder that you have overdue books.
+</p>
+
+<table border="1" >
+                 <tr > 
+                     <th>&nbsp;Title&nbsp;</th>
+                     <th>&nbsp;Call Number&nbsp;</th>
+                     <th>&nbsp;Due Date&nbsp;</th>
+                  </tr>
+
+<apex:repeat var="loan" value="{!relatedTo.Loans__r}">
+                               <apex:outputPanel layout="block" rendered="{!loan.Overdue__c}">
+                               <tr>
+                                    <td> <apex:outPutText value="&nbsp;{!loan.Book_Title__c}&nbsp;" escape="false"/></td>
+                                    <td> <apex:outPutText value="&nbsp;{!loan.Book_Copy__r.Name}&nbsp;" escape="false"/></td>
+                                    <td> <apex:outPutText value="&nbsp;{!CASE(MONTH(Loan.Due__c),1,"01/",2,"02/",3,"03/",4,"04/",5,"05/",6,"06/",7,"07/",8,"08/",9,"09/",10,"10/",11,"11/",12,"12/","??/")}{!DAY(loan.Due__c)}/{!YEAR(Loan.Due__c)}&nbsp;" escape="false"/></td>
+                               </tr>
+                               </apex:outputPanel>
+                </apex:repeat>
+</table>
+
+<p>Overdue books can result in fines. Please either return or renew the books above as soon as possible.
+</p>
+
+<p>Signed,
+</p>
+
+<p>Salesforce Library
+</p>
+
+
+      
+</td>
+      
+<td align="left" bgcolor="#ffffff" style="background:#ffffff;padding:0;width:5%" width="5%">&nbsp;
+</td>
+      
+<td align="left" bgcolor="#9C78FF" style="background:#9c78ff;padding:0;width:1%" width="1%">&nbsp;
+</td>
+    
+</tr>
+    
+    
+    
+<tr>
+    
+<td align="left" bgcolor="#9C78FF" style="background:#9c78ff;padding:0">&nbsp;
+</td>
+      
+<td align="left" bgcolor="#ffffff" style="background:#ffffff;padding:0" colspan="3">&nbsp;
+</td>
+      
+<td align="left" bgcolor="#9C78FF" style="background:#9c78ff;padding:0">&nbsp;
+</td>
+    
+</tr>
+    
+    
+    
+<tr>
+      
+<td align="left" bgcolor="#9C78FF">&nbsp;
+</td>
+      
+<td align="center" bgcolor="#ffffff" style="background:#ffffff;padding:0;vertical-align:top">&nbsp;
+</td>
+      
+<td align="left" bgcolor="#ffffff" style="background:#ffffff;font-size:12px;color:#404040;vertical-align:top"> 
+      
+</td>
+      
+<td align="left" bgcolor="#ffffff" style="background:#ffffff;padding:0;vertical-align:top">&nbsp;
+</td>
+      
+<td align="left" bgcolor="#9C78FF" style="background:#9c78ff;padding:0;vertical-align:top">&nbsp;
+</td>
+    
+</tr>
+    
+    
+    
+<tr>
+    
+<td align="left" bgcolor="#9C78FF" style="background:#9c78ff;padding:0;height:4px">&nbsp;
+</td>
+      
+<td align="left" bgcolor="#ffffff" style="background:#ffffff;padding:0;height:4px" colspan="3">&nbsp;
+</td>
+      
+<td align="left" bgcolor="#9C78FF" style="background:#9c78ff;padding:0;height:4px">&nbsp;
+</td>
+    
+</tr>
+    
+    
+    
+<tr>
+      
+<td align="left" bgcolor="#9C78FF" style="background:#9c78ff;padding:0;height:4px" colspan="5">&nbsp;
+</td>
+    
+</tr>
+    
+    
+    
+<tr>
+      
+<td align="center" colspan="5" bgcolor="#9C78FF" style="background:#9c78ff;color:#ffffff;font-family:Arial;font-size:12px;padding:8px 0!important">
+       
+
+       
+            
+      
+</td>      
+    
+</tr>
+    
+    
+    
+<tr>
+      
+<td align="left" bgcolor="#9C78FF" style="background:#9c78ff;padding:0;height:4px" colspan="5">&nbsp;
+</td>
+    
+</tr>
+    
+  </tbody>
+
+</table>
+
+            </body>
+        </html>
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

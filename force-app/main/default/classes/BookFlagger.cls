@@ -2,7 +2,7 @@ global class BookFlagger implements Database.Batchable<sObject>, Schedulable {
 
     global Database.QueryLocator start(Database.BatchableContext BC){
 
-        String query = 'SELECT name,flagged_for_removal__c,branch__c from book_copy__c WHERE condition__c LIKE \'damaged\' ORDER BY name';
+        String query = 'SELECT id,name,flagged_for_removal__c,branch__c from book_copy__c WHERE condition__c LIKE \'damaged\' ORDER BY name';
         return Database.getQueryLocator(query);
     }
   
@@ -29,10 +29,11 @@ global class BookFlagger implements Database.Batchable<sObject>, Schedulable {
     
     Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
     mail.setToAddresses(toAddresses);
-    mail.setSubject('New Books Flagged for Removal');
     mail.setSaveAsActivity(false);
-    Id templateId= [SELECT id FROM EmailTemplate WHERE name LIKE 'Librarian Email Template'].id;
-    mail.setTemplateId(templateId);
+    EmailTemplate librarianTemplate = [SELECT id,subject,htmlValue FROM EmailTemplate WHERE name LIKE 'Librarian Email Template'];
+    mail.setTemplateId(librarianTemplate.id);
+    mail.setSubject(librarianTemplate.subject);
+    mail.setHtmlBody(librarianTemplate.htmlValue);
     Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail }); 
    }
 

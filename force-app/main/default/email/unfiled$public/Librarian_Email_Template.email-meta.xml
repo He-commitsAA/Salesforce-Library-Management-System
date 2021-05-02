@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Librarian Email Template</name>
+    <style>none</style>
+    <subject>Monthly Flagged Books Reminder</subject>
+    <textOnly>Hello {!User.FirstName},
+
+This is a reminder that books have just been flagged for removal.
+
+Please check your assigned Task on the Library Management App for a list of books to watch out for.
+
+Signed,
+
+Library Management App Administrator</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>
