@@ -1,0 +1,10 @@
+[
+    {
+        "sobject": "Book__c",
+        "files": ["Book__c.json"]
+    },
+    {
+        "sobject": "Branch__c",
+        "files": ["Branch__c.json"]
+    }
+]
