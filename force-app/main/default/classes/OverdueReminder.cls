@@ -2,7 +2,7 @@ global class OverdueReminder implements Database.Batchable<sObject>, Schedulable
     
     global Database.QueryLocator start(Database.BatchableContext BC){
 
-        List<AggregateResult> overdueLoans = [SELECT Borrower__c FROM Loan__c WHERE overdue__c = TRUE GROUP BY Borrower__c];
+        List<AggregateResult> overdueLoans = [SELECT Borrower__c FROM Loan__c WHERE overdue__c = TRUE AND returned__c = FALSE GROUP BY Borrower__c];
         List<id> overdueBorrowerIds = new List<id>();
 
         for(AggregateResult agg: overdueLoans){
@@ -16,6 +16,7 @@ global class OverdueReminder implements Database.Batchable<sObject>, Schedulable
     global void execute(Database.BatchableContext BC, List<Contact> overdueBorrowers){
 
         for(Contact c: overdueBorrowers){
+            System.debug(c);
             Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
             List<String> toAddresses = new List<String>();
             toAddresses.add(c.email);
