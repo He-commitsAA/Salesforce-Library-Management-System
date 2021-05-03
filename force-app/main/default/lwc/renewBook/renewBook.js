@@ -18,11 +18,15 @@ export default class RenewBook extends LightningElement {
             let searchQuery = event.target.value;
             //change shown loans to give best match to query by copy#, title, or borrower
             this.loans = [];
+            let results = 0;
             for (let i in this.allLoans) {
+                if (results >= 10) break;
                 let l = this.allLoans[i];
                 if (l.Title.toLowerCase().includes(searchQuery.toLowerCase()) || l.Serial.toLowerCase().includes(searchQuery.toLowerCase()) || l.Member.toLowerCase().includes(searchQuery.toLowerCase())) {
-                    if (l !== undefined)
+                    if (l !== undefined) {
                         this.loans.push(l);
+                        results++;
+                    }
                 }
             }
         }
