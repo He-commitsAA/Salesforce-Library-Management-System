@@ -51,8 +51,8 @@ public inherited sharing class TestDataFactory {
     }
 
     public static void setLibrarianBranch(Id librarianUserId, Id branchId) {
-        Contact librarianContact = [Select Id, Branch__c FROM Contact WHERE Librarian_User__c=:librarianUserId];
-        librarianContact.Branch__c = branchId;
-        Update librarianContact;
+        Librarian__c librarian = [Select Id, Branch__c FROM Librarian__c WHERE User__c=:librarianUserId];
+        librarian.Branch__c = branchId;
+        Update librarian;
     }
 }

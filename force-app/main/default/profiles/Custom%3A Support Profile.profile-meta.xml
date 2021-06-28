@@ -31,10 +31,6 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>ContactTriggerActions</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>InputException</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -136,11 +132,6 @@
         <editable>true</editable>
         <field>Contact.Birthdate</field>
         <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Contact.Branch__c</field>
-        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -249,6 +240,36 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Librarian__c.Branch__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Librarian__c.Email__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Librarian__c.First_Name__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Librarian__c.Full_Name__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Librarian__c.Last_Name__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Librarian__c.User__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Loan__c.Book_Title__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -282,6 +303,9 @@
         <layout>Branch__c-Branch Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Librarian__c-Librarian Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Loan__c-Loan Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -301,11 +325,6 @@
         <recordType>Contact.Borrower</recordType>
         <visible>false</visible>
     </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <default>false</default>
-        <recordType>Contact.Librarian</recordType>
-        <visible>false</visible>
-    </recordTypeVisibilities>
     <tabVisibilities>
         <tab>Book_Copy__c</tab>
         <visibility>Hidden</visibility>
@@ -321,6 +340,10 @@
     <tabVisibilities>
         <tab>Branch__c</tab>
         <visibility>Hidden</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>Librarian__c</tab>
+        <visibility>DefaultOff</visibility>
     </tabVisibilities>
     <tabVisibilities>
         <tab>Loan__c</tab>

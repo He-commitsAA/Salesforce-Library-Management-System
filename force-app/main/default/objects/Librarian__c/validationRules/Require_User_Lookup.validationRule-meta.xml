@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Require_User_Lookup</fullName>
+    <active>true</active>
+    <description>Since the User Lookup Field cannot be marked as required, this validation rule make sure it&apos;s filled in.</description>
+    <errorConditionFormula>ISNULL( User__c )</errorConditionFormula>
+    <errorDisplayField>User__c</errorDisplayField>
+    <errorMessage>User field is required.</errorMessage>
+</ValidationRule>

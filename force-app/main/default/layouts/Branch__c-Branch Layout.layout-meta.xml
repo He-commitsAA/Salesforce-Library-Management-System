@@ -74,11 +74,6 @@
         <relatedList>ContentDocumentRelatedList</relatedList>
     </relatedLists>
     <relatedLists>
-        <fields>FULL_NAME</fields>
-        <fields>CONTACT.EMAIL</fields>
-        <relatedList>Contact.Branch__c</relatedList>
-    </relatedLists>
-    <relatedLists>
         <fields>NAME</fields>
         <fields>Book__c</fields>
         <fields>Condition__c</fields>

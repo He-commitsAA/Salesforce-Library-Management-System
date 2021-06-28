@@ -24,21 +24,18 @@ public with sharing class BookControllerTests {
         User librarian = [SELECT Id FROM User WHERE Name='Test Test'];
         
         System.runAs(librarian) {
-            RecordType borrowerRecordType = [SELECT Id FROM RecordType WHERE SobjectType='Contact' AND Name='Borrower'];
-            Contact borrower = [SELECT Id,Name,Card_Number__c FROM Contact WHERE RecordTypeId=:borrowerRecordType.Id];
-            Book_Copy__c bookCopy = [SELECT Id,Name,Book__c FROM Book_Copy__c];
-            Book__c book = [SELECT Id,Name FROM Book__c WHERE Id=:bookCopy.Book__c];
+            Contact borrower = [SELECT Id,Name,Card_Number__c FROM Contact WHERE RecordType.Name='Borrower'];
+            Book_Copy__c bookCopy = [SELECT Id,Name,Book__r.Name FROM Book_Copy__c];
 
             String result = BookController.checkoutBook(bookCopy.Name, borrower.Card_Number__c);
-            System.assertEquals('Checked out copy of ' + book.Name + ' to ' + borrower.Name, result);
+            System.assertEquals('Checked out copy of ' + bookCopy.Book__r.Name + ' to ' + borrower.Name, result);
 
             Loan__c loan = [SELECT Borrower__c,Checkout__c,Due__c FROM Loan__c WHERE Book_Copy__c=:bookCopy.Id];
             System.assertEquals(borrower.Id, loan.Borrower__c);
             System.assertEquals(Date.today(), loan.Checkout__c);
             System.assertEquals(Date.today().addDays(14), loan.Due__c);
 
-            bookCopy = [SELECT Book__c,Borrower__c,Branch__c,Condition__c FROM Book_Copy__c WHERE Id=:bookCopy.Id];
-            System.assertEquals(book.Id, bookCopy.Book__c);
+            bookCopy = [SELECT Borrower__c,Branch__c,Condition__c FROM Book_Copy__c WHERE Id=:bookCopy.Id];
             System.assertEquals(borrower.Id, bookCopy.Borrower__c);
             System.assertEquals(null, bookCopy.Branch__c);
             System.assertEquals('Used', bookCopy.Condition__c);
@@ -50,8 +47,7 @@ public with sharing class BookControllerTests {
         User librarian = [SELECT Id FROM User WHERE Name='Test Test'];
         
         System.runAs(librarian) {
-            RecordType borrowerRecordType = [SELECT Id FROM RecordType WHERE SobjectType='Contact' AND Name='Borrower'];
-            Contact borrower = [SELECT Card_Number__c FROM Contact WHERE RecordTypeId=:borrowerRecordType.Id];
+            Contact borrower = [SELECT Card_Number__c FROM Contact WHERE RecordType.Name='Borrower'];
 
             Boolean gotError = false;
             try {
@@ -89,8 +85,7 @@ public with sharing class BookControllerTests {
         User librarian = [SELECT Id FROM User WHERE Name='Test Test'];
         
         System.runAs(librarian) {
-            RecordType borrowerRecordType = [SELECT Id FROM RecordType WHERE SobjectType='Contact' AND Name='Borrower'];
-            Contact borrower = [SELECT Card_Number__c FROM Contact WHERE RecordTypeId=:borrowerRecordType.Id];
+            Contact borrower = [SELECT Card_Number__c FROM Contact WHERE RecordType.Name='Borrower'];
             Book_Copy__c bookCopy = [SELECT Name FROM Book_Copy__c];
 
             BookController.checkoutBook(bookCopy.Name, borrower.Card_Number__c);
@@ -112,20 +107,18 @@ public with sharing class BookControllerTests {
         User librarian = [SELECT Id FROM User WHERE Name='Test Test'];
         
         System.runAs(librarian) {
-            RecordType borrowerRecordType = [SELECT Id FROM RecordType WHERE SobjectType='Contact' AND Name='Borrower'];
-            Contact borrower = [SELECT Id,Name,Card_Number__c FROM Contact WHERE RecordTypeId=:borrowerRecordType.Id];
-            Book_Copy__c bookCopy = [SELECT Id,Name,Book__c FROM Book_Copy__c LIMIT 1];
-            Book__c book = [SELECT Id,Name FROM Book__c WHERE Id=:bookCopy.Book__c];
+            Contact borrower = [SELECT Id,Name,Card_Number__c FROM Contact WHERE RecordType.Name='Borrower'];
+            Book_Copy__c bookCopy = [SELECT Id,Name FROM Book_Copy__c LIMIT 1];
 
             String checkedOut = BookController.checkoutBook(bookCopy.Name, borrower.Card_Number__c);
 
             String result = BookController.returnBook(bookCopy.Name, true);
             System.assertEquals('Return successful.',result);
 
-            Loan__c loan = [SELECT Borrower__c,Checkout__c,Due__c,Returned__c FROM Loan__c WHERE Book_Copy__c=:bookCopy.Id];
+            Loan__c loan = [SELECT Returned__c FROM Loan__c WHERE Book_Copy__c=:bookCopy.Id];
             System.assertEquals(true, loan.Returned__c);
 
-            bookCopy = [SELECT id,Book__c,Borrower__c,Branch__c,Condition__c FROM Book_Copy__c WHERE Id=:bookCopy.Id];
+            bookCopy = [SELECT Borrower__c,Branch__c,Condition__c FROM Book_Copy__c WHERE Id=:bookCopy.Id];
             System.assertEquals(null, bookCopy.Borrower__c);
             System.assertEquals(BranchHelper.getBranch().id, bookCopy.Branch__c);
             System.assertEquals('Damaged',bookCopy.Condition__c);

@@ -11,15 +11,15 @@ public inherited sharing class LibrarianTests {
     @isTest
     public static void librarianContactTest() {
         User libUser = [SELECT Id,Name,Email FROM User WHERE Profile.Name='Librarian' AND Name='Test Test' LIMIT 1];
-        Contact libContact = [SELECT Name,Email FROM Contact WHERE RecordType.Name='Librarian' AND Librarian_User__c=:libUser.Id];
+        Librarian__c librarian = [SELECT Name,Email__c FROM Librarian__c WHERE User__c=:libUser.Id];
 
-        System.assertEquals(libUser.Name, libContact.Name);
-        System.assertEquals(libUser.Email, libContact.Email);
+        System.assertEquals(libUser.Name, librarian.Name);
+        System.assertEquals(libUser.Email, librarian.Email__c);
     }
 
     @isTest
     public static void createLibrarianTasksTest() {
-        Task libTask = [SELECT Subject,Status,Priority FROM Task WHERE Who.RecordType.SobjectType='Contact' AND Who.RecordType.Name='Librarian'];
+        Task libTask = [SELECT Subject,Status,Priority FROM Task WHERE What.Type='Librarian__c'];
         
         System.assertEquals('Assign Librarian to Branch', libTask.Subject);
         System.assertEquals('Not Started', libTask.Status);
@@ -29,27 +29,13 @@ public inherited sharing class LibrarianTests {
     @isTest
     public static void updateLibrarianTasksTest() {
         Branch__c branch = [SELECT Id FROM Branch__c LIMIT 1];
-        Contact libContact = [SELECT Id,Branch__c FROM Contact WHERE RecordType.Name='Librarian' FOR UPDATE];
+        Librarian__c librarian = [SELECT Id,Branch__c FROM Librarian__c FOR UPDATE];
 
-        libContact.Branch__c = branch.Id;
+        librarian.Branch__c = branch.Id;
 
-        Update libContact;
+        Update librarian;
 
-        Task libTask = [SELECT Status FROM Task WHERE WhoId=:libContact.Id];
+        Task libTask = [SELECT Status FROM Task WHERE WhatId=:librarian.Id];
         System.assertEquals('Completed', libTask.Status);
-    }
-    
-    @isTest
-    public static void enforceLibrarianBranch() {
-        Boolean gotError = false;
-        
-        try {
-            Update [SELECT Id FROM Contact WHERE RecordType.Name='Librarian' AND Branch__c=null FOR UPDATE];
-        } catch (DmlException e) {
-            gotError = true;
-            System.assert(e.getMessage().contains('Librarians must be associated with a Branch'), e.getMessage());
-        }
-
-        System.assert(gotError);
     }
 }

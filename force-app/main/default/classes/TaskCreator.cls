@@ -11,7 +11,7 @@ public with sharing class TaskCreator {
                     toRemove += bc.name+'\n';
                 }
             }
-            Id librarianContactId = [select id from contact where branch__c=:branch.id limit 1].id;
+            Id librarianContactId = [SELECT Id FROM Librarian__c WHERE Branch__c=:branch.id LIMIT 1].id;
             Id librarianUserId = [select librarian_user__c from contact where id =: librarianContactId limit 1].librarian_user__c;
             tasks.add(new Task(Subject = 'Remove from Circulation', OwnerId = librarianUserId, Priority = 'Normal',
                 ActivityDate = Date.today().addDays(7), Status = 'Not Started', Description = toRemove, WhatId = branch.id ));

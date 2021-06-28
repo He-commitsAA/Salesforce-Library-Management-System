@@ -40,7 +40,7 @@
         <actionName>View</actionName>
         <comment>Action override created by Lightning App Builder during activation.</comment>
         <content>Contact_Record_Page</content>
-        <formFactor>Small</formFactor>
+        <formFactor>Large</formFactor>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
         <type>Flexipage</type>
         <pageOrSobjectType>Contact</pageOrSobjectType>
@@ -49,7 +49,7 @@
         <actionName>View</actionName>
         <comment>Action override created by Lightning App Builder during activation.</comment>
         <content>Contact_Record_Page</content>
-        <formFactor>Large</formFactor>
+        <formFactor>Small</formFactor>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
         <type>Flexipage</type>
         <pageOrSobjectType>Contact</pageOrSobjectType>
@@ -96,6 +96,7 @@
     <tabs>standard-home</tabs>
     <tabs>Branch_Finder</tabs>
     <tabs>standard-Contact</tabs>
+    <tabs>Librarian__c</tabs>
     <tabs>Book__c</tabs>
     <tabs>Book_Copy__c</tabs>
     <tabs>Branch__c</tabs>
